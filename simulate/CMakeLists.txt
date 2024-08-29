@@ -15,6 +15,7 @@
 cmake_minimum_required(VERSION 3.16)
 
 add_subdirectory(AUVC)
+add_subdirectory(rx_tx)
 
 # INTERPROCEDURAL_OPTIMIZATION is enforced when enabled.
 set(CMAKE_POLICY_DEFAULT_CMP0069 NEW)
@@ -186,6 +187,7 @@ if(SIMULATE_BUILD_EXECUTABLE)
 
   target_link_libraries(
     simulate
+    PUBLIC
     libsimulate
     mujoco::mujoco
     glfw
@@ -290,5 +292,3 @@ if(SIMULATE_BUILD_EXECUTABLE)
     endif()
   endif()
 endif()
-
-add_subdirectory(rx_tx)

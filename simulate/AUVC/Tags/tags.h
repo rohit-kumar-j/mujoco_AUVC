@@ -26,7 +26,7 @@ typedef struct ExtractedPoints_ ExtractedPoints_;
 
 namespace auvc{
 
-int processImage(unsigned char* color_buffer, float pts[8]);
+int processImage(cv::Mat& image, cv::Mat& image_gray, cv::Mat& flipped, float pts[8], AprilTags::TagDetector* m_tagDetector);
 // void processImage(camData *cvData, auvcData* rawColorData);
 
 }
