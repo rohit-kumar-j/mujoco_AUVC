@@ -39,6 +39,7 @@
 
 /*** AUVC : Controller ***/
 #include <dlfcn.h>
+#include "AUVC/Tags/AR_SRC/Tag36h11.h"
 #include "AUVC/Tags/tags.h"
 #include "AUVC/controller.h"
 #include "mujoco/mjmodel.h"
@@ -57,7 +58,10 @@ const char* libphysics_filename = "libRoverPhysics.so";
 void *libphysics;
 
 auvcData *_avData;
-
+cv::Mat *image_ptr;
+cv::Mat *image_gray_ptr;
+cv::Mat *flipped_ptr;
+AprilTags::TagDetector* m_tagDetector(NULL);
 
 /* TODO: OPEN CV */
 #ifndef VIEWPORT_HEIGHT
@@ -595,7 +599,7 @@ void renderActuatorForces(mjModel* m, mjData* d, mjvOption* opt, mjvPerturb* per
     for(int i=0; i<10; i++){
         int idx = mj_name2id(m, mjOBJ_SITE, thruster_names[i]);
         int act_idx = mj_name2id(m, mjOBJ_ACTUATOR, actuator_names[i]);
-        // printf("thruster[%d] idx: %d\n",i,idx);
+        // printf("thruster[%d] idx: %d\n",i,idx)o
         mjvGeom *g = &scn->geoms[scn->ngeom];
         g->type=  mjGEOM_ARROW;
         mjtNum size[3];
@@ -611,6 +615,8 @@ void renderActuatorForces(mjModel* m, mjData* d, mjvOption* opt, mjvPerturb* per
           rgba[0]= 1; rgba[1]= 0; rgba[2]= 0; rgba[3]= 1; }
         else{
           rgba[0]= 0; rgba[1]= 1; rgba[2]= 0; rgba[3]= 1; }
+        if(i>=6) {
+          rgba[0]= 0; rgba[1]= 0; rgba[2]= 1; rgba[3]= 0.5; } size[0]= 0.03;  size[1]= 0.03;
         // Default values
         g->dataid = -1;
         g->objtype = mjOBJ_UNKNOWN; // mjOBJ_GEOM
@@ -631,7 +637,6 @@ void renderActuatorForces(mjModel* m, mjData* d, mjvOption* opt, mjvPerturb* per
         mjv_initGeom(g, mjGEOM_ARROW, size, pos, mat, rgba);
         scn->ngeom +=1;
     }
-
 }
 
 
@@ -652,7 +657,8 @@ void ShowSubCAM(mj::Simulate* sim, mjrRect rect, mjvScene* scn, mjvCamera cam, m
     rect.height/4
   };
 
-  int camera_id = mj_name2id(sim->m_, mjOBJ_CAMERA, "sub_front_cam");
+  int camera_id = mj_name2id(sim->m_, mjOBJ_CAMERA, "front_cam");
+  // int camera_id = mj_name2id(sim->m_, mjOBJ_CAMERA, "sub_front_cam");
   if (camera_id < 0)
   {
     printf("Error: Camera not found\n");
@@ -697,6 +703,11 @@ void ShowSubCAM(mj::Simulate* sim, mjrRect rect, mjvScene* scn, mjvCamera cam, m
     _avData->color_buffer[i] = sim->avData->color_buffer[i]; // copy data
   }
   mjr_readPixels2(_avData->color_buffer, nullptr, viewport, &sim->platform_ui->mjr_context(), 360, 270);
+
+  (*image_ptr).data = _avData->color_buffer;
+  // float pts[8] = {0};
+  // int npts = auvc::processImage(*image_ptr, *image_gray_ptr, *flipped_ptr, pts, m_tagDetector);
+  // printf("npts: %d\n", npts);
 
   mjr_render(viewport, &sim->scn, &sim->platform_ui->mjr_context(),_avData);
 
@@ -2834,12 +2845,12 @@ void Simulate::Render() {
     const_viewport.left =rect.width/4;
     // const_viewport.left = rect.width/4 - const_viewport.width/2;
   }
-  if (this->profiler) {
-    const_viewport.left -= rect.width/4;
-  }
-  if (this->sensor) {
-    const_viewport.left -= rect.width/4;
-  }
+  //if (this->profiler) {
+  //  const_viewport.left -= rect.width/4;
+  //}
+  //if (this->sensor) {
+  //  const_viewport.left -= rect.width/4;
+  //}
   if(this->sub_camera){
     ShowSubCAM(this, const_viewport, &scn, cam, &opt, &pert);
   }
@@ -2949,6 +2960,14 @@ void Simulate::RenderLoop(auvcData* avD) {
   mjui_add(&this->ui0, this->def_watch);
   UiModify(&this->ui0, &this->uistate, &this->platform_ui->mjr_context());
   UiModify(&this->ui1, &this->uistate, &this->platform_ui->mjr_context());
+
+  cv::Mat image(1080, 1080, CV_8UC3);
+  cv::Mat image_gray(1080, 1080, CV_8UC3);
+  cv::Mat flipped(1080, 1080, CV_8UC3);
+  image_ptr = &image;
+  image_gray_ptr = &image_gray;
+  flipped_ptr = &flipped;
+  m_tagDetector = new AprilTags::TagDetector(AprilTags::tagCodes36h11);
 
   // set VSync to initial value
   this->platform_ui->SetVSync(this->vsync);

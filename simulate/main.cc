@@ -35,7 +35,6 @@
 
 #include "AUVC/Tags/AR_SRC/TagDetector.h"
 #include "AUVC/Tags/AR_SRC/Tag36h11.h"
-AprilTags::TagDetector* m_tagDetector(NULL);
 
 #define MUJOCO_PLUGIN_DIR "mujoco_plugin"
 
@@ -393,7 +392,7 @@ void PhysicsLoop(mj::Simulate& sim) {
             sim.speed_changed = false;
 
             // run single step, let next iteration deal with timing
-            plug_physics_update(m,d);
+            // plug_physics_update(m,d);
             plug_controller_update(m,d);
             mj_step(m, d);
             stepped = true;
@@ -420,7 +419,7 @@ void PhysicsLoop(mj::Simulate& sim) {
               sim.InjectNoise();
 
               // call mj_step
-              plug_physics_update(m,d);
+              // plug_physics_update(m,d);
               plug_controller_update(m,d);
               mj_step(m, d);
               stepped = true;
@@ -485,8 +484,7 @@ void PhysicsThread(mj::Simulate* sim, const char* filename) {
 
 //------------------------------------------ Camera Thread --------------------------------------------------
 
-void CameraThread(mj::Simulate* sim, auvcData* avData, unsigned char* internal_color_buffer, AprilTags::TagDetector* m_tagDetector){
-  for(int i =0; i<10000; i++){
+void CameraThread(mj::Simulate* sim, auvcData* avData, unsigned char* internal_color_buffer){ for(int i =0; i<10000; i++){
 
     /* { // Init test
         std::string video_str = "/dev/video0";
@@ -557,6 +555,10 @@ void CameraThread(mj::Simulate* sim, auvcData* avData, unsigned char* internal_c
         }
     } */
 
+    cv::Mat image(1080, 1080, CV_8UC3);
+    cv::Mat image_gray(1080, 1080, CV_8UC3);
+    cv::Mat flipped(1080, 1080, CV_8UC3);
+
     while(!sim->exitrequest.load()) {
       if(sim->camSync.load() == 1) {
         printf("Not Locked yet\n");
@@ -575,7 +577,9 @@ void CameraThread(mj::Simulate* sim, auvcData* avData, unsigned char* internal_c
           // for (int i = 0; i < VIEWPORT_HEIGHT * VIEWPORT_WIDTH * 3; i++) {
           //   internal_color_buffer[i] = avData->color_buffer[i];
           // }
-          int npts = auvc::processImage(internal_color_buffer, pts);
+          //
+          image.data = internal_color_buffer;
+          int npts = auvc::processImage(image, image_gray, flipped, pts, NULL);
 
           // Simulate camera capturing data
           // std::this_thread::sleep_for(std::chrono::milliseconds(100));
@@ -654,7 +658,8 @@ int main(int argc, char** argv) {
         printf("ERROR: Build the RoverPhysics first before launching the simualte executable: \"cmake --build <path-to-build-dir> --target RoverPhysics\" \n");
     } // Load controller
 
-  const char* filename = "/home/rohit/Github/mujoco_AUVC/model/sub/sub.xml";
+  const char* filename = "/home/rohit/Github/mujoco_AUVC/model/flying-dog/flying-dog.xml";
+  // const char* filename = "/home/rohit/Github/mujoco_AUVC/model/sub/sub.xml";
   if (argc >  1) {
     filename = argv[1];
   }
@@ -701,8 +706,7 @@ int main(int argc, char** argv) {
   // cv::Mat image_gray(1080, 1080, CV_8UC3, &avData->color_buffer);
   // cv::Mat flipped(1080, 1080, CV_8UC3, &avData->color_buffer);
 
-  m_tagDetector = new AprilTags::TagDetector(AprilTags::tagCodes36h11);
-  // std::thread camerathreadhandle(&CameraThread,sim.get(), avData, internal_color_buffer, m_tagDetector);
+  // std::thread camerathreadhandle(&CameraThread,sim.get(), avData, internal_color_buffer);
 
   // start physics thread
   std::thread physicsthreadhandle(&PhysicsThread, sim.get(), filename);
@@ -717,7 +721,6 @@ int main(int argc, char** argv) {
 
   free(avData->color_buffer);
   free(internal_color_buffer);
-  delete m_tagDetector;
 
   return 0;
 }
