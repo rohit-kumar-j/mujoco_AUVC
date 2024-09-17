@@ -38,9 +38,5 @@ extern "C" int roverPhysicsInitPlug(mjModel *m, mjData *d) {
 }
 
 extern "C" bool roverPhysicsUpdatePlug(mjModel *m, mjData *d) {
-  float fr_force = d->ctrl[3];
-  float fl_force = d->ctrl[7];
-  float br_force = d->ctrl[11];
-  float bl_force = d->ctrl[15];
   return true;
 }

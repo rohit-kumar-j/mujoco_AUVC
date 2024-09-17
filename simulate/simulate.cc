@@ -596,7 +596,7 @@ void renderActuatorForces(mjModel *m, mjData *d, mjvOption *opt,
     mjtNum size[3];
     size[0] = 0.04; // radius
     size[1] = 0.04;
-    size[2] = d->ctrl[act_idx] * 0.02; // length = force applied along z-axis
+    size[2] = d->ctrl[act_idx] * 0.002; // length = force applied along z-axis
     mjtNum pos[3];
     pos[0] = d->site_xpos[3 * idx + 0];
     pos[1] = d->site_xpos[3 * idx + 1];
@@ -604,12 +604,10 @@ void renderActuatorForces(mjModel *m, mjData *d, mjvOption *opt,
 
     float rgba[4]; // color settings
     rgba[0] = 0.1;
-    rgba[1] = 0.2;
-    rgba[2] = 0.4;
+    rgba[1] = 0.4;
+    rgba[2] = 0.1;
     rgba[3] = 0.5;
 
-    size[0] = 0.03;
-    size[1] = 0.03;
     // Default values
     g->dataid = -1;
     g->objtype = mjOBJ_UNKNOWN; // mjOBJ_GEOM
