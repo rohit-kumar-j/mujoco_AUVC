@@ -40,7 +40,7 @@
   <worldbody>
     <geom name="floor" size="0 0 .05" type="plane" material="grid" condim="3"/>
     <light name="spotlight" mode="targetbodycom" castshadow="false" target="fdog" diffuse=".8 .8 .8" specular="0.3 0.3 0.3" pos="0 -6 4" cutoff="30"/>
-    <body name="fdog" pos="0 0 .8">
+    <body name="fdog" pos="0 0 .75">
       <freejoint/>
       <light name="top light1" castshadow="false" pos="1 1 1" mode="targetbodycom" target="fdog" diffuse=".4 .4 .4"/>
       <light name="top light2" castshadow="false" pos="-1 1 1" mode="targetbodycom" target="fdog" diffuse=".4 .4 .4"/>
@@ -67,7 +67,7 @@
         <joint name="fr_1_hinge" type="hinge" range="-45 45" limited="true"/>
         <geom name="fr_thigh_geom" type="mesh" mesh="coxa2" pos="-0.066 -0.115 -0.12" rgba="1 0.54 0 1"/>
         <body name="fr_mid_link" pos="0.46 0 0" euler="90 0 0" >
-          <joint name="fr_2_hinge" type="hinge" range="-45 45" limited="true" />
+          <joint name="fr_2_hinge" type="hinge" range="-90 45" limited="true" />
           <geom name="fr_thigh_motor" type="mesh" mesh="motor_AX18" pos="0 0 0" euler="0 0 0" rgba="0 0 0 1"/>
           <geom name="fr_thigh_link" type="mesh" mesh="femur2" pos="-0.05 0.108 -0.12" euler="0 0 -90" rgba="1 0.54 0 1"/>
           <geom name="fr_BLDC" type="mesh" mesh="bldc1" pos="-0.545 0.1 -0.618" rgba="0.4 0.5 0.8 1" />
@@ -91,7 +91,7 @@
         <joint name="fl_1_hinge" type="hinge" range="-45 45" limited="true" />
         <geom name="fl_thigh_geom" type="mesh" mesh="coxa2" pos="-0.066 -0.115 -0.12" rgba="1 0.54 0 1"/>
         <body name="fl_mid_link" pos="0.46 0 0" euler="90 0 0" >
-          <joint name="fl_2_hinge" type="hinge" axis="0 0 -1" range="-45 45" limited="true" />
+          <joint name="fl_2_hinge" type="hinge" axis="0 0 -1" range="-45 90" limited="true" />
           <geom name="fl_thigh_motor" type="mesh" mesh="motor_AX18" pos="0 0 0" euler="0 0 0" rgba="0 0 0 1"/>
           <geom name="fl_thigh_link" type="mesh" mesh="femur2" pos="-0.05 0.108 -0.12" euler="0 0 -90" rgba="1 0.54 0 1"/>
           <geom name="fl_BLDC" type="mesh" mesh="bldc1" pos="-0.545 0.1 -0.618" rgba="0.4 0.5 0.8 1" />
@@ -114,7 +114,7 @@
         <joint name="br_1_hinge" type="hinge" range="-45 45" limited="true" />
         <geom name="br_thigh_geom" type="mesh" mesh="coxa2" pos="-0.066 -0.115 -0.12" rgba="1 0.54 0 1"/>
         <body name="br_mid_link" pos="0.46 0 0" euler="90 0 0" >
-          <joint name="br_2_hinge" type="hinge" axis="0 0 -1" range="-45 45" limited="true" />
+          <joint name="br_2_hinge" type="hinge" axis="0 0 -1" range="-45 90" limited="true" />
           <geom name="br_thigh_motor" type="mesh" mesh="motor_AX18" pos="0 0 0" euler="0 0 0" rgba="0 0 0 1"/>
           <geom name="br_thigh_link" type="mesh" mesh="femur2" pos="-0.05 0.108 -0.12" euler="0 0 -90" rgba="1 0.54 0 1"/>
           <geom name="br_BLDC" type="mesh" mesh="bldc1" pos="-0.545 0.1 -0.618" rgba="0.4 0.5 0.8 1" />
@@ -137,7 +137,7 @@
         <joint name="bl_1_hinge" type="hinge" range="-45 45" limited="true" />
         <geom name="bl_thigh_geom" type="mesh" mesh="coxa2" pos="-0.066 -0.115 -0.12" rgba="1 0.54 0 1"/>
         <body name="bl_mid_link" pos="0.46 0 0" euler="90 0 0" >
-          <joint name="bl_2_hinge" type="hinge"  axis="0 0 -1" range="-45 45" limited="true"/>
+          <joint name="bl_2_hinge" type="hinge"  axis="0 0 -1" range="-45 90" limited="true"/>
           <geom name="bl_thigh_motor" type="mesh" mesh="motor_AX18" pos="0 0 0" euler="0 0 0" rgba="0 0 0 1"/>
           <geom name="bl_thigh_link" type="mesh" mesh="femur2" pos="-0.05 0.108 -0.12" euler="0 0 -90" rgba="1 0.54 0 1"/>
           <geom name="bl_BLDC" type="mesh" mesh="bldc1" pos="-0.545 0.1 -0.618" rgba="0.4 0.5 0.8 1" />
@@ -160,27 +160,27 @@
   </worldbody>
 
   <actuator>
-    <position name="fr_1_act" joint="fr_1_hinge" kp="288" kv="100" gear="10" ctrllimited="true" ctrlrange="-45 45" forcelimited="true" forcerange="-150 150"/>
-    <position name="fr_2_act" joint="fr_2_hinge" kp="288" kv="100" gear="10" ctrllimited="true" ctrlrange="-45 45" forcelimited="true" forcerange="-180 180"/>
-    <position name="fr_3_act" joint="fr_3_hinge" kp="288" kv="100" gear="10" ctrllimited="true" ctrlrange="-45 45" forcelimited="true" forcerange="-150 150"/>
+    <position name="fr_1_act" joint="fr_1_hinge" kp="288" kv="100" gear="10" forcelimited="true" forcerange="-150 150"/>
+    <position name="fr_2_act" joint="fr_2_hinge" kp="288" kv="100" gear="10" forcelimited="true" forcerange="-180 180"/>
+    <position name="fr_3_act" joint="fr_3_hinge" kp="288" kv="100" gear="10" forcelimited="true" forcerange="-150 150"/>
     <velocity name="fr_prop" joint="fr_prop_hinge" kv="40" gear="5" ctrllimited="false" ctrlrange="-200 0"/>
     <motor name="fr_prop_motor"  site="fr_s1" gear="0 0 1 0 0 0" ctrllimited="false" ctrlrange="-952 952" forcelimited="false" forcerange="-951 951"/>
 
-    <position name="fl_1_act" joint="fl_1_hinge" kp="288" kv="100" gear="10" ctrllimited="true" ctrlrange="-45 45" forcelimited="true" forcerange="-150 150"/>
-    <position name="fl_2_act" joint="fl_2_hinge" kp="288" kv="100" gear="10" ctrllimited="true" ctrlrange="-45 45" forcelimited="true" forcerange="-180 180"/>
-    <position name="fl_3_act" joint="fl_3_hinge" kp="288" kv="100" gear="10" ctrllimited="true" ctrlrange="-45 45" forcelimited="true" forcerange="-150 150"/>
+    <position name="fl_1_act" joint="fl_1_hinge" kp="288" kv="100" gear="10" forcelimited="true" forcerange="-150 150"/>
+    <position name="fl_2_act" joint="fl_2_hinge" kp="288" kv="100" gear="10" forcelimited="true" forcerange="-180 180"/>
+    <position name="fl_3_act" joint="fl_3_hinge" kp="288" kv="100" gear="10" forcelimited="true" forcerange="-150 150"/>
     <velocity name="fl_prop" joint="fl_prop_hinge" kv="40" gear="5" ctrllimited="false" ctrlrange="0 200"/>
     <motor name="fl_prop_motor"  site="fl_s1" gear="0 0 1 0 0 0" ctrllimited="false" ctrlrange="-952 952" forcelimited="false" forcerange="-951 951"/>
 
-    <position name="br_1_act" joint="br_1_hinge" kp="288" kv="100" gear="10" ctrllimited="true" ctrlrange="-45 45" forcelimited="true" forcerange="-150 150"/>
-    <position name="br_2_act" joint="br_2_hinge" kp="288" kv="100" gear="10" ctrllimited="true" ctrlrange="-45 45" forcelimited="true" forcerange="-180 180"/>
-    <position name="br_3_act" joint="br_3_hinge" kp="288" kv="100" gear="10" ctrllimited="true" ctrlrange="-45 45" forcelimited="true" forcerange="-150 150"/>
+    <position name="br_1_act" joint="br_1_hinge" kp="288" kv="100" gear="10" forcelimited="true" forcerange="-150 150"/>
+    <position name="br_2_act" joint="br_2_hinge" kp="288" kv="100" gear="10" forcelimited="true" forcerange="-180 180"/>
+    <position name="br_3_act" joint="br_3_hinge" kp="288" kv="100" gear="10" forcelimited="true" forcerange="-150 150"/>
     <velocity name="br_prop" joint="br_prop_hinge" kv="40" gear="5" ctrllimited="false" ctrlrange="0 200"/>
     <motor name="br_prop_motor"  site="br_s1" gear="0 0 1 0 0 0" ctrllimited="false" ctrlrange="-952 952" forcelimited="false" forcerange="-951 951"/>
 
-    <position name="bl_1_act" joint="bl_1_hinge" kp="288" kv="100" gear="10" ctrllimited="true" ctrlrange="-45 45" forcelimited="true" forcerange="-150 150"/>
-    <position name="bl_2_act" joint="bl_2_hinge" kp="288" kv="100" gear="10" ctrllimited="true" ctrlrange="-45 45" forcelimited="true" forcerange="-180 180"/>
-    <position name="bl_3_act" joint="bl_3_hinge" kp="288" kv="100" gear="10" ctrllimited="true" ctrlrange="-45 45" forcelimited="true" forcerange="-150 150"/>
+    <position name="bl_1_act" joint="bl_1_hinge" kp="288" kv="100" gear="10" forcelimited="true" forcerange="-150 150"/>
+    <position name="bl_2_act" joint="bl_2_hinge" kp="288" kv="100" gear="10" forcelimited="true" forcerange="-180 180"/>
+    <position name="bl_3_act" joint="bl_3_hinge" kp="288" kv="100" gear="10" forcelimited="true" forcerange="-150 150"/>
     <velocity name="bl_prop" joint="bl_prop_hinge" kv="40" gear="5" ctrllimited="false" ctrlrange="-200 0"/>
     <motor name="bl_prop_motor"  site="bl_s1" gear="0 0 1 0 0 0" ctrllimited="false" ctrlrange="-952 952" forcelimited="false" forcerange="-951 951"/>
 
@@ -207,7 +207,7 @@
   <contact>
     <exclude body1="fdog" body2="fr_mid_link"/>
     <exclude body1="fdog" body2="fr_prop" />
-    <exclude body1="fdog" body2="fr_final_link" />
+    <!-- <exclude body1="fdog" body2="fr_final_link" /> -->
     <exclude body1="fdog" body2="fr_thigh" />
     <exclude body1="fr_mid_link" body2="fr_prop"/>
     <exclude body1="fr_mid_link" body2="fr_final_link"/>
@@ -218,7 +218,7 @@
 
     <exclude body1="fdog" body2="fl_mid_link"/>
     <exclude body1="fdog" body2="fl_prop" />
-    <exclude body1="fdog" body2="fl_final_link" />
+    <!-- <exclude body1="fdog" body2="fl_final_link" /> -->
     <exclude body1="fdog" body2="fl_thigh" />
     <exclude body1="fl_mid_link" body2="fl_prop"/>
     <exclude body1="fl_mid_link" body2="fl_final_link"/>
@@ -229,7 +229,7 @@
 
     <exclude body1="fdog" body2="bl_mid_link"/>
     <exclude body1="fdog" body2="bl_prop" />
-    <exclude body1="fdog" body2="bl_final_link" />
+    <!-- <exclude body1="fdog" body2="bl_final_link" /> -->
     <exclude body1="fdog" body2="bl_thigh" />
     <exclude body1="bl_mid_link" body2="bl_prop"/>
     <exclude body1="bl_mid_link" body2="bl_final_link"/>
@@ -240,7 +240,7 @@
 
     <exclude body1="fdog" body2="br_mid_link"/>
     <exclude body1="fdog" body2="br_prop" />
-    <exclude body1="fdog" body2="br_final_link" />
+    <!-- <exclude body1="fdog" body2="br_final_link" /> -->
     <exclude body1="fdog" body2="br_thigh" />
     <exclude body1="br_mid_link" body2="br_prop"/>
     <exclude body1="br_mid_link" body2="br_final_link"/>
