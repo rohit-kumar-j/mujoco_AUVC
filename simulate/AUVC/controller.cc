@@ -5,7 +5,16 @@
 #include <math.h>
 #include <mujoco/mujoco.h>
 #include <stdio.h>
+#include <stdlib.h>
 
+// #define WALK
+// #define FLYING_LEGS_OPEN
+// #define FLYING_LEGS_CLOSED
+// #define DRIVE_1
+// #define DRIVE_2
+
+
+static int flip_once_flag= 0.0;
 static float theta = 0;
 void quaternion_to_euler(double x, double y, double z, double w, double *X,
                          double *Y, double *Z) {
@@ -27,6 +36,27 @@ void quaternion_to_euler(double x, double y, double z, double w, double *X,
   double t3 = +2.0 * (w * z + x * y);
   double t4 = +1.0 - 2.0 * (y * y + z * z);
   *Z = atan2(t3, t4) * (180.0 / M_PI);
+}
+
+void euler_to_quaternion(double roll, double pitch, double yaw, double *qx,
+                         double *qy, double *qz, double *qw) {
+  // Convert input angles from degrees to radians for the quaternion calculation
+  roll = roll * M_PI / 180.0;
+  pitch = pitch * M_PI / 180.0;
+  yaw = yaw * M_PI / 180.0;
+
+  // Compute quaternion components
+  double cy = cos(yaw * 0.5);
+  double sy = sin(yaw * 0.5);
+  double cp = cos(pitch * 0.5);
+  double sp = sin(pitch * 0.5);
+  double cr = cos(roll * 0.5);
+  double sr = sin(roll * 0.5);
+
+  *qx = sr * cp * cy - cr * sp * sy;
+  *qy = cr * sp * cy + sr * cp * sy;
+  *qz = cr * cp * sy - sr * sp * cy;
+  *qw = cr * cp * cy + sr * sp * sy;
 }
 
 extern "C" void controllerTestFunc(void) { printf("Hi from Plugin!\n"); }
@@ -55,34 +85,50 @@ float clip(float val, float min, float max) {
   return val;
 }
 
-void set_props_speed(mjData *d, float speed);
+void set_props_speed(mjData *d);
+void freeze_porps(mjData *d);
 void set_hinge_joints_zero(mjData *d);
 void single_leg_pattern(mjData *d);
 void fold_legs(mjData *d);
 void drive_config_1(mjData *d);
-void drive_with_props_1(mjData *d, float speed);
+void drive_with_props_1(mjData *d);
+void drive_config_2(mjData *d);
+void drive_with_props_2(mjData *d);
+void flip_robot(mjData* d);
 
 extern "C" bool controllerUpdatePlug(mjModel *m, mjData *d) {
 
+#ifdef WALK
   // Walking section!
-  // set_props_speed(d, 0);
-  // single_leg_pattern(d);
+  freeze_porps(d);
+  single_leg_pattern(d);
+#endif
 
+#ifdef FLYING_LEGS_OPEN
   // Flying section!
-  // float speed = d->time < 10.0 ? d->time * 17 * 10 : 1700.0;
-  // printf("speed: %f\n", speed);
-  // set_hinge_joints_zero(d);
-  // set_props_speed(d,speed);
+  set_hinge_joints_zero(d);
+  set_props_speed(d);
+#endif
 
+#ifdef FLYING_LEGS_CLOSED
   // Flying with legs closed!
-  // float speed = d->time < 10.0 ? d->time * 17 * 10 : 1700.0;
-  // fold_legs(d);
-  // set_props_speed(d, speed);
+  fold_legs(d);
+  set_props_speed(d);
+#endif
 
+#ifdef DRIVE_1
   // Driving configuration 1
-  float speed = d->time < 10.0 ? d->time * 1 * 10 : 100.0;
   drive_config_1(d);
-  drive_with_props_1(d, speed);
+  drive_with_props_1(d);
+#endif
+
+#ifdef DRIVE_2
+  // Driving configuration 2
+  flip_robot(d);
+  drive_config_2(d);
+  drive_with_props_2(d);
+#endif
+
 
   return true;
 }
@@ -121,7 +167,19 @@ void fold_legs(mjData *d) {
   d->ctrl[17] = 70.0;
 }
 
-void set_props_speed(mjData *d, float speed) {
+void freeze_porps(mjData *d) {
+  d->ctrl[3] = 0;
+  d->ctrl[4] = 0;
+  d->ctrl[8] = 0;
+  d->ctrl[9] = 0;
+  d->ctrl[13] = 0;
+  d->ctrl[14] = 0;
+  d->ctrl[18] = 0;
+  d->ctrl[19] = 0;
+}
+
+void set_props_speed(mjData *d) {
+  float speed = d->time < 10.0 ? d->time * 17 * 10 : 1700.0;
   d->ctrl[3] = -speed;  // fr_prop force
   d->ctrl[4] = speed;   // fr_prop
   d->ctrl[8] = speed;   // fl_prop force
@@ -269,7 +327,8 @@ void drive_config_1(mjData *d) {
   d->ctrl[17] = 0.1;
 }
 
-void drive_with_props_1(mjData *d, float speed) {
+void drive_with_props_1(mjData *d) {
+  float speed = d->time < 10.0 ? d->time * 1 * 10 : 100.0;
   d->ctrl[3] = -speed; // fr_prop force
   // d->ctrl[4] = speed;   // fr_prop
   d->ctrl[8] = speed; // fl_prop force
@@ -277,5 +336,53 @@ void drive_with_props_1(mjData *d, float speed) {
   d->ctrl[13] = -speed; // br_prop force
   // d->ctrl[14] = -speed; // br_prop
   d->ctrl[18] = speed; // bl_prop force
+  // d->ctrl[19] = speed;  // bl_prop
+}
+
+void flip_robot(mjData* d){
+  double ex, ey, ez;
+  quaternion_to_euler(d->qpos[3], d->qpos[4], d->qpos[5], d->qpos[6], &ex, &ey, &ez);
+  double qx, qy, qz, qw = 0.0;
+  euler_to_quaternion(ez, ey+180, ez, &qx, &qy, &qz, &qw);
+  // printf("w: %f x: %f y: %f z: %f\n", d->qpos[3], d->qpos[4], d->qpos[5], d->qpos[6]);
+
+  if(!flip_once_flag){ // This only runs once
+    d->qpos[3] = qw;
+    d->qpos[4] = qx;
+    d->qpos[5] = qy;
+    d->qpos[6] = qz;
+    flip_once_flag += 1;
+    // printf("cond!\n");
+  }
+
+}
+
+void drive_config_2(mjData *d) {
+  d->ctrl[0] = -45;
+  d->ctrl[1] = -120.0;
+  d->ctrl[2] = -3;
+
+  d->ctrl[5] = 45;
+  d->ctrl[6] = 120.0;
+  d->ctrl[7] = -10;
+
+  d->ctrl[10] = 45;
+  d->ctrl[11] = 120.0;
+  d->ctrl[12] = -3;
+
+  d->ctrl[15] = -45;
+  d->ctrl[16] = 120.0;
+  d->ctrl[17] = -10;
+}
+
+void drive_with_props_2(mjData *d) {
+  float speed = d->time < 10.0 ? d->time * 1 * 10 : 100.0;
+  d->ctrl[3] = speed; // fr_prop force
+  // d->ctrl[4] = speed;   // fr_prop
+  d->ctrl[8] = -speed; // fl_prop force
+  // d->ctrl[9] = speed;   // fl_prop
+  d->ctrl[13] = speed; // br_prop force
+  // d->ctrl[14] = -speed; // br_prop
+  d->ctrl[18] = -speed; // bl_prop force
   // d->ctrl[19] = speed;  // bl_prop
 }
