@@ -1,0 +1,207 @@
+rjax_17_controller:
+  # Publish all joint states -----------------------------------
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 50
+
+  # Position Controllers --------------------------------------
+  TYaw_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: TYaw
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  SPitch_L_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: SPitch_L
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  TRoll_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: TRoll
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  SPitch_R_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: SPitch_R
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  SRoll_L_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: SRoll_L
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  SRoll_R_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: SRoll_R
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  SYaw_L_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: SYaw_L
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  SYaw_R_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: SYaw_R
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  EPitch_R_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: EPitch_R
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  EPitch_L_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: EPitch_L
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  HRoll_L_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: HRoll_L
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  HRoll_R_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: HRoll_R
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  HYaw_L_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: HYaw_L
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  HYaw_R_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: HYaw_R
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  HPitch_L_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: HPitch_L
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  HPitch_R_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: HPitch_R
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  Knee_L_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: Knee_L
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  Knee_R_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: Knee_R
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  Rev26_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: Rev26
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  Rev27_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: Rev27
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  Rev28_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: Rev28
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  Rev29_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: Rev29
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  APitch_L_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: APitch_L
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  APitch_R_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: APitch_R
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  ARoll_L_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: ARoll_L
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  ARoll_R_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: ARoll_R
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  Rev62_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: Rev62
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  Slider64_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: Slider64
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  Rev65_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: Rev65
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  Slider67_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: Slider67
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  Rev72_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: Rev72
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  Rev73_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: Rev73
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  Rev74_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: Rev74
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  Rev75_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: Rev75
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  Rev76_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: Rev76
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  Rev77_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: Rev77
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  Rev78_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: Rev78
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  Rev79_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: Rev79
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  Slider80_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: Slider80
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  Slider81_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: Slider81
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  Slider82_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: Slider82
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  Slider83_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: Slider83
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  Rev84_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: Rev84
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  Slider85_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: Slider85
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  Rev86_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: Rev86
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  Slider87_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: Slider87
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  Rev88_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: Rev88
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  Slider89_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: Slider89
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  Rev90_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: Rev90
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  Slider91_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: Slider91
+    pid: {p: 100.0, i: 0.01, d: 10.0}

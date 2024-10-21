@@ -1,0 +1,132 @@
+<mujoco>
+    <sensor>
+        <!-- Base/Root Sensors -->
+        <framepos name="rjax_root_pos" objtype="xbody" objname="b_base_link" />
+        <framequat name="rjax_root_orn" objtype="xbody" objname="b_base_link" />
+        <framelinvel name="rjax_root_linvel" objtype="xbody" objname="b_base_link" />
+        <frameangvel name="rjax_root_angvel" objtype="xbody" objname="b_base_link" />
+
+        <!-- Rjax Duplicate: Velocity Sensors -->
+        <framepos name="ghost_root_pos" objtype="xbody" objname="b2_base_link" />
+        <framequat name="ghost_root_orn" objtype="xbody" objname="b2_base_link" />
+        <framelinvel name="ghost_root_linvel" objtype="xbody" objname="b2_base_link" />
+        <frameangvel name="ghost_root_angvel" objtype="xbody" objname="b2_base_link" />
+
+        <!-- Rjax: COM Sensors -->
+        <subtreecom name="rjax_com_pos" body="b_base_link" />
+        <subtreelinvel name="rjax_com_vel" body="b_base_link" />
+        <!-- Ghost: COM Sensors -->
+        <subtreecom name="ghost_com_pos" body="b2_base_link" />
+        <subtreelinvel name="ghost_com_vel" body="b2_base_link" />
+
+        <!--  -->
+        <!-- Rjax : Position Sensors -->
+        <!--  -->
+        <jointpos name="rjax_pos_TYaw" joint="j_TYaw" />
+        <jointpos name="rjax_pos_TRoll" joint="j_TRoll" />
+        <jointpos name="rjax_pos_SPitch_L" joint="j_SPitch_L" />
+        <jointpos name="rjax_pos_SRoll_L" joint="j_SRoll_L" />
+        <jointpos name="rjax_pos_SYaw_L" joint="j_SYaw_L" />
+        <jointpos name="rjax_pos_EPitch_L" joint="j_EPitch_L" />
+        <jointpos name="rjax_pos_SPitch_R" joint="j_SPitch_R" />
+        <jointpos name="rjax_pos_SRoll_R" joint="j_SRoll_R" />
+        <jointpos name="rjax_pos_SYaw_R" joint="j_SYaw_R" />
+        <jointpos name="rjax_pos_EPitch_R" joint="j_EPitch_R" />
+        <jointpos name="rjax_pos_HRoll_L" joint="j_HRoll_L" />
+        <jointpos name="rjax_pos_HYaw_L" joint="j_HYaw_L" />
+        <jointpos name="rjax_pos_HPitch_L" joint="j_HPitch_L" />
+        <jointpos name="rjax_pos_Knee_L" joint="j_Knee_L" />
+        <jointpos name="rjax_pos_APitch_L" joint="j_APitch_L" />
+        <jointpos name="rjax_pos_ARoll_L" joint="j_ARoll_L" />
+        <jointpos name="rjax_pos_HRoll_R" joint="j_HRoll_R" />
+        <jointpos name="rjax_pos_HYaw_R" joint="j_HYaw_R" />
+        <jointpos name="rjax_pos_HPitch_R" joint="j_HPitch_R" />
+        <jointpos name="rjax_pos_Knee_R" joint="j_Knee_R" />
+        <jointpos name="rjax_pos_APitch_R" joint="j_APitch_R" />
+        <jointpos name="rjax_pos_ARoll_R" joint="j_ARoll_R" />
+        <!-- Ghost: Position Sensors -->
+        <jointpos name="ghost_pos_TYaw" joint="j2_TYaw" />
+        <jointpos name="ghost_pos_TRoll" joint="j2_TRoll" />
+        <jointpos name="ghost_pos_SPitch_L" joint="j2_SPitch_L" />
+        <jointpos name="ghost_pos_SRoll_L" joint="j2_SRoll_L" />
+        <jointpos name="ghost_pos_SYaw_L" joint="j2_SYaw_L" />
+        <jointpos name="ghost_pos_EPitch_L" joint="j2_EPitch_L" />
+        <jointpos name="ghost_pos_SPitch_R" joint="j2_SPitch_R" />
+        <jointpos name="ghost_pos_SRoll_R" joint="j2_SRoll_R" />
+        <jointpos name="ghost_pos_SYaw_R" joint="j2_SYaw_R" />
+        <jointpos name="ghost_pos_EPitch_R" joint="j2_EPitch_R" />
+        <jointpos name="ghost_pos_HRoll_L" joint="j2_HRoll_L" />
+        <jointpos name="ghost_pos_HYaw_L" joint="j2_HYaw_L" />
+        <jointpos name="ghost_pos_HPitch_L" joint="j2_HPitch_L" />
+        <jointpos name="ghost_pos_Knee_L" joint="j2_Knee_L" />
+        <jointpos name="ghost_pos_APitch_L" joint="j2_APitch_L" />
+        <jointpos name="ghost_pos_ARoll_L" joint="j2_ARoll_L" />
+        <jointpos name="ghost_pos_HRoll_R" joint="j2_HRoll_R" />
+        <jointpos name="ghost_pos_HYaw_R" joint="j2_HYaw_R" />
+        <jointpos name="ghost_pos_HPitch_R" joint="j2_HPitch_R" />
+        <jointpos name="ghost_pos_Knee_R" joint="j2_Knee_R" />
+        <jointpos name="ghost_pos_APitch_R" joint="j2_APitch_R" />
+        <jointpos name="ghost_pos_ARoll_R" joint="j2_ARoll_R" />
+
+        <!--  -->
+        <!-- Rjax: Velocity Sensors -->
+        <!--  -->
+        <jointvel name="rjax_vel_TYaw" joint="j_TYaw" cutoff="0" />
+        <jointvel name="rjax_vel_TRoll" joint="j_TRoll" cutoff="0" />
+        <jointvel name="rjax_vel_SPitch_L" joint="j_SPitch_L" cutoff="0" />
+        <jointvel name="rjax_vel_SRoll_L" joint="j_SRoll_L" cutoff="0" />
+        <jointvel name="rjax_vel_SYaw_L" joint="j_SYaw_L" cutoff="0" />
+        <jointvel name="rjax_vel_EPitch_L" joint="j_EPitch_L" cutoff="0" />
+        <jointvel name="rjax_vel_SPitch_R" joint="j_SPitch_R" cutoff="0" />
+        <jointvel name="rjax_vel_SRoll_R" joint="j_SRoll_R" cutoff="0" />
+        <jointvel name="rjax_vel_SYaw_R" joint="j_SYaw_R" cutoff="0" />
+        <jointvel name="rjax_vel_EPitch_R" joint="j_EPitch_R" cutoff="0" />
+        <jointvel name="rjax_vel_HRoll_L" joint="j_HRoll_L" cutoff="0" />
+        <jointvel name="rjax_vel_HYaw_L" joint="j_HYaw_L" cutoff="0" />
+        <jointvel name="rjax_vel_HPitch_L" joint="j_HPitch_L" cutoff="0" />
+        <jointvel name="rjax_vel_Knee_L" joint="j_Knee_L" cutoff="0" />
+        <jointvel name="rjax_vel_APitch_L" joint="j_APitch_L" cutoff="0" />
+        <jointvel name="rjax_vel_ARoll_L" joint="j_ARoll_L" cutoff="0" />
+        <jointvel name="rjax_vel_HRoll_R" joint="j_HRoll_R" cutoff="0" />
+        <jointvel name="rjax_vel_HYaw_R" joint="j_HYaw_R" cutoff="0" />
+        <jointvel name="rjax_vel_HPitch_R" joint="j_HPitch_R" cutoff="0" />
+        <jointvel name="rjax_vel_Knee_R" joint="j_Knee_R" cutoff="0" />
+        <jointvel name="rjax_vel_APitch_R" joint="j_APitch_R" cutoff="0" />
+        <jointvel name="rjax_vel_ARoll_R" joint="j_ARoll_R" cutoff="0" />
+        <!-- Ghost: Velocity sensors -->
+        <jointvel name="ghost_vel_TYaw" joint="j2_TYaw" cutoff="0" />
+        <jointvel name="ghost_vel_TRoll" joint="j2_TRoll" cutoff="0" />
+        <jointvel name="ghost_vel_SPitch_L" joint="j2_SPitch_L" cutoff="0" />
+        <jointvel name="ghost_vel_SRoll_L" joint="j2_SRoll_L" cutoff="0" />
+        <jointvel name="ghost_vel_SYaw_L" joint="j2_SYaw_L" cutoff="0" />
+        <jointvel name="ghost_vel_EPitch_L" joint="j2_EPitch_L" cutoff="0" />
+        <jointvel name="ghost_vel_SPitch_R" joint="j2_SPitch_R" cutoff="0" />
+        <jointvel name="ghost_vel_SRoll_R" joint="j2_SRoll_R" cutoff="0" />
+        <jointvel name="ghost_vel_SYaw_R" joint="j2_SYaw_R" cutoff="0" />
+        <jointvel name="ghost_vel_EPitch_R" joint="j2_EPitch_R" cutoff="0" />
+        <jointvel name="ghost_vel_HRoll_L" joint="j2_HRoll_L" cutoff="0" />
+        <jointvel name="ghost_vel_HYaw_L" joint="j2_HYaw_L" cutoff="0" />
+        <jointvel name="ghost_vel_HPitch_L" joint="j2_HPitch_L" cutoff="0" />
+        <jointvel name="ghost_vel_Knee_L" joint="j2_Knee_L" cutoff="0" />
+        <jointvel name="ghost_vel_APitch_L" joint="j2_APitch_L" cutoff="0" />
+        <jointvel name="ghost_vel_ARoll_L" joint="j2_ARoll_L" cutoff="0" />
+        <jointvel name="ghost_vel_HRoll_R" joint="j2_HRoll_R" cutoff="0" />
+        <jointvel name="ghost_vel_HYaw_R" joint="j2_HYaw_R" cutoff="0" />
+        <jointvel name="ghost_vel_HPitch_R" joint="j2_HPitch_R" cutoff="0" />
+        <jointvel name="ghost_vel_Knee_R" joint="j2_Knee_R" cutoff="0" />
+        <jointvel name="ghost_vel_APitch_R" joint="j2_APitch_R" cutoff="0" />
+        <jointvel name="ghost_vel_ARoll_R" joint="j2_ARoll_R" cutoff="0" />
+        <!--  -->
+        <!-- Rjax: End Effector Position Sensors -->
+        <!--  -->
+        <framepos name="rjax_pos_foot_l" objtype="body" objname="b_foot_end_eff_l" />
+        <framepos name="rjax_pos_foot_r" objtype="body" objname="b_foot_end_eff_r" />
+        <framepos name="rjax_pos_end_arm_l" objtype="body" objname="b_end_arm_ball_l" />
+        <framepos name="rjax_pos_end_arm_r" objtype="body" objname="b_end_arm_ball_r" />
+        <!-- Ghost: End Effectors Position Sensors -->
+        <framepos name="ghost_pos_foot_l" objtype="body" objname="b2_foot_end_eff_l" />
+        <framepos name="ghost_pos_foot_r" objtype="body" objname="b2_foot_end_eff_r" />
+        <framepos name="ghost_pos_end_arm_l" objtype="body" objname="b2_end_arm_ball_l" />
+        <framepos name="ghost_pos_end_arm_r" objtype="body" objname="b2_end_arm_ball_r" />
+    </sensor>
+</mujoco>

@@ -1,0 +1,873 @@
+<mujoco model="rjax_16">
+    <compiler angle="radian" autolimits="true" />
+    <option gravity="0 0 0" collision="predefined" timestep="0.00666" /> <!-- 0.033332/ 0.00666  ~= 5
+    timestees per motion -->
+    <default>
+        <site type="cylinder" size="0.01 0.03" zaxis="0 0 1" rgba="0.1 0.1 1 .1" />
+        <joint damping="10" stiffness="0" margin="0.001" frictionloss="10" />
+        <equality solref="0.0002 0.9" solimp="0.949 0.95 0.1 0.1 2" />
+    </default>
+
+    <asset>
+        <mesh name="m_base_link" file="meshes\base_link.stl" scale="0.001 0.001 0.001" />
+        <mesh name="m_torso_mid" file="meshes\torso_mid_1.stl" scale="0.001 0.001 0.001" />
+        <mesh name="m_s_pitch_l" file="meshes\s_pitch_l_1.stl" scale="0.001 0.001 0.001" />
+        <mesh name="m_s_pitch_r" file="meshes\s_pitch_r_1.stl" scale="0.001 0.001 0.001" />
+        <mesh name="m_s_adapter_l" file="meshes\s_adapter_l_1.stl" scale="0.001 0.001 0.001" />
+        <mesh name="m_main_body" file="meshes\main_body_1.stl" scale="0.001 0.001 0.001" />
+        <mesh name="m_s_adapter_r" file="meshes\s_adapter_r_1.stl" scale="0.001 0.001 0.001" />
+        <mesh name="m_s_roll_l" file="meshes\s_roll_l_1.stl" scale="0.001 0.001 0.001" />
+        <mesh name="m_s_roll_r" file="meshes\s_roll_r_1.stl" scale="0.001 0.001 0.001" />
+        <mesh name="m_s_yaw_l" file="meshes\s_yaw_l_1.stl" scale="0.001 0.001 0.001" />
+        <mesh name="m_s_yaw_r" file="meshes\s_yaw_r_1.stl" scale="0.001 0.001 0.001" />
+        <mesh name="m_end_arm_r" file="meshes\end_arm_r_1.stl" scale="0.001 0.001 0.001" />
+        <mesh name="m_end_arm_l" file="meshes\end_arm_l_1.stl" scale="0.001 0.001 0.001" />
+        <mesh name="m_leg_adapter_l" file="meshes\leg_adapter_l_1.stl" scale="0.001 0.001 0.001" />
+        <mesh name="m_leg_adapter_r" file="meshes\leg_adapter_r_1.stl" scale="0.001 0.001 0.001" />
+        <mesh name="m_hip_yaw_l" file="meshes\hip_yaw_l_1.stl" scale="0.001 0.001 0.001" />
+        <mesh name="m_hip_yaw_r" file="meshes\hip_yaw_r_1.stl" scale="0.001 0.001 0.001" />
+        <mesh name="m_thigh_l" file="meshes\thigh_l_1.stl" scale="0.001 0.001 0.001" />
+        <mesh name="m_thigh_r" file="meshes\thigh_r_1.stl" scale="0.001 0.001 0.001" />
+        <mesh name="m_calf_l" file="meshes\calf_l_1.stl" scale="0.001 0.001 0.001" />
+        <mesh name="m_calf_r" file="meshes\calf_r_1.stl" scale="0.001 0.001 0.001" />
+        <mesh name="m_acyl_lo" file="meshes\acyl_lo_1.stl" scale="0.001 0.001 0.001" />
+        <mesh name="m_acyl_li" file="meshes\acyl_li_1.stl" scale="0.001 0.001 0.001" />
+        <mesh name="m_acyl_ri" file="meshes\acyl_ri_1.stl" scale="0.001 0.001 0.001" />
+        <mesh name="m_acyl_ro" file="meshes\acyl_ro_1.stl" scale="0.001 0.001 0.001" />
+        <mesh name="m_a_commutator_l" file="meshes\a_commutator_l_1.stl" scale="0.001 0.001 0.001" />
+        <mesh name="m_a_commutator_r" file="meshes\a_commutator_r_1.stl" scale="0.001 0.001 0.001" />
+        <mesh name="m_foot_l" file="meshes\foot_l_1.stl" scale="0.001 0.001 0.001" />
+        <mesh name="m_foot_r" file="meshes\foot_r_1.stl" scale="0.001 0.001 0.001" />
+        <mesh name="m_e_cyl_r" file="meshes\e_cyl_r_1.stl" scale="0.001 0.001 0.001" />
+        <mesh name="m_e_piston_r" file="meshes\e_piston_r_1.stl" scale="0.001 0.001 0.001" />
+        <mesh name="m_e_cyl_l" file="meshes\e_cyl_l_1.stl" scale="0.001 0.001 0.001" />
+        <mesh name="m_e_piston_l" file="meshes\e_piston_l_1.stl" scale="0.001 0.001 0.001" />
+        <mesh name="m_crank_ri" file="meshes\crank_ri_1.stl" scale="0.001 0.001 0.001" />
+        <mesh name="m_tf_ri" file="meshes\tf_ri_1.stl" scale="0.001 0.001 0.001" />
+        <mesh name="m_tf_ro" file="meshes\tf_ro_1.stl" scale="0.001 0.001 0.001" />
+        <mesh name="m_crank_ro" file="meshes\crank_ro_1.stl" scale="0.001 0.001 0.001" />
+        <mesh name="m_crank_lo" file="meshes\crank_lo_1.stl" scale="0.001 0.001 0.001" />
+        <mesh name="m_crank_li" file="meshes\crank_li_1.stl" scale="0.001 0.001 0.001" />
+        <mesh name="m_tf_lo" file="meshes\tf_lo_1.stl" scale="0.001 0.001 0.001" />
+        <mesh name="m_tf_li" file="meshes\tf_li_1.stl" scale="0.001 0.001 0.001" />
+        <mesh name="m_a_piston_li" file="meshes\a_piston_li_1.stl" scale="0.001 0.001 0.001" />
+        <mesh name="m_a_piston_lo" file="meshes\a_piston_lo_1.stl" scale="0.001 0.001 0.001" />
+        <mesh name="m_a_piston_ro" file="meshes\a_piston_ro_1.stl" scale="0.001 0.001 0.001" />
+        <mesh name="m_a_piston_ri" file="meshes\a_piston_ri_1.stl" scale="0.001 0.001 0.001" />
+        <mesh name="m_k_cyl_l" file="meshes\k_cyl_l_1.stl" scale="0.001 0.001 0.001" />
+        <mesh name="m_k_piston_l" file="meshes\k_piston_l_1.stl" scale="0.001 0.001 0.001" />
+        <mesh name="m_k_cyl_r" file="meshes\k_cyl_r_1.stl" scale="0.001 0.001 0.001" />
+        <mesh name="m_k_piston_r" file="meshes\k_piston_r_1.stl" scale="0.001 0.001 0.001" />
+        <mesh name="m_h_cyl_l" file="meshes\h_cyl_l_1.stl" scale="0.001 0.001 0.001" />
+        <mesh name="m_h_piston_l" file="meshes\h_piston_l_1.stl" scale="0.001 0.001 0.001" />
+        <mesh name="m_h_cyl_r" file="meshes\h_cyl_r_1.stl" scale="0.001 0.001 0.001" />
+        <mesh name="m_h_piston_r" file="meshes\h_piston_r_1.stl" scale="0.001 0.001 0.001" />
+    </asset>
+
+    <worldbody>
+        <!-- LIGHT -->
+        <light name="l_light" diffuse=".5 .5 .5" pos="0 0 2" dir="0 0 -1" mode="targetbodycom"
+            target="b_base_link" castshadow="true" />
+        <camera name="track_body" mode="targetbody" target="b_base_link" pos="-1.5 -3 0.5" />
+
+        <!-- ROBOT -->
+        <body name="b_base_link" pos="0 0 0" euler="0.15 0 0">
+            <joint name="j_base_link" type="free" damping="0" frictionloss="0" />
+            <geom name="g_base_link" type="mesh" mesh="m_base_link" />
+            <body name="b_torso_mid" pos="0 -0.000423 0.09483">
+                <inertial pos="-0.00199358 0.0015583 0.0684747"
+                    quat="0.462279 0.885447 -0.00925238 0.0468584" mass="1.42697"
+                    diaginertia="0.00433823 0.00328022 0.00317154" />
+                <joint name="j_TYaw" pos="0 0 0" axis="0 -0.087156 0.996195" type="hinge"
+                    range="-0.78539 0.78539" damping="40" />
+                <geom name="g_torso_mid" pos="0 0.000423 -0.09483" type="mesh" mesh="m_torso_mid" />
+                <body name="b_main_body" pos="0 -0.074253 0.062767">
+                    <inertial pos="4.72919e-05 0.105093 0.278369"
+                        quat="0.997962 0.0638084 -0.000450933 -0.000225579" mass="51.3948"
+                        diaginertia="1.28965 0.944327 0.746389" />
+                    <joint name="j_TRoll" pos="0 0 0" axis="0 -0.996195 -0.087156" type="hinge"
+                        limited="true" range="-0.08 0.08" damping="50" />
+                    <geom name="g_main_body" pos="0 0.074676 -0.157597" type="mesh"
+                        mesh="m_main_body" />
+                    <geom name="g_s_pitch_l" pos="0 0.074676 -0.157597" type="mesh"
+                        mesh="m_s_pitch_l" />
+                    <geom name="g_s_pitch_r" pos="0 0.074676 -0.157597" type="mesh"
+                        mesh="m_s_pitch_r" />
+                    <body name="b_s_adapter_l" pos="0.203976 0.051541 0.496393">
+                        <inertial pos="0.04692 -0.00030179 -0.00625393"
+                            quat="0.497855 0.563093 -0.49113 0.440293" mass="0.699962"
+                            diaginertia="0.0054197 0.00505806 0.00161023" />
+                        <joint name="j_SPitch_L" axis="0.991445 0.015085 -0.129652" type="hinge"
+                            limited="true" range="-1.57079 1.57079" damping="50" />
+                        <geom name="g_s_adapter_l" pos="-0.203976 0.023135 -0.65399" type="mesh"
+                            mesh="m_s_adapter_l" />
+                        <body name="b_s_roll_l" pos="0.084272 0.089685 -0.000735">
+                            <inertial pos="0.00456335 -0.0838442 -0.0368111"
+                                quat="0.677046 0.727983 -0.0771344 0.075497" mass="2.2438"
+                                diaginertia="0.0100802 0.00814454 0.00630426" />
+                            <joint name="j_SRoll_L" pos="0 0 0" axis="0 -0.993299 -0.115571"
+                                type="hinge" limited="true" range="-0.20944 2.094395" damping="50" />
+                            <geom name="g_s_roll_l" pos="-0.288248 -0.06655 -0.653255" type="mesh"
+                                mesh="m_s_roll_l" />
+                            <body name="b_s_yaw_l" pos="0.008917 -0.074769 -0.103675">
+                                <inertial pos="-0.00496756 -0.00428128 -0.115401"
+                                    quat="0.767115 -0.00433749 0.032373 0.640678" mass="2.05459"
+                                    diaginertia="0.0185103 0.0184774 0.00589828" />
+                                <joint name="j_SYaw_L" pos="0 0 0"
+                                    axis="0.043619 -0.115461 0.992354" type="hinge" limited="true"
+                                    range="-0.87266 0.87266" damping="50" />
+                                <geom name="g_s_yaw_l" pos="-0.297165 0.008219 -0.54958" type="mesh"
+                                    mesh="m_s_yaw_l" />
+                                <body name="b_e_cyl_l" pos="-0.003467 -0.070285 -0.088138">
+                                    <inertial pos="-0.00403006 0.00870966 -0.0929502"
+                                        quat="0.982472 0.185075 0.0222863 -0.000165253"
+                                        mass="0.231148"
+                                        diaginertia="0.00106668 0.000950452 0.000190864" />
+                                    <joint name="j_Rev65_e_cyl_l" pos="0 0 0"
+                                        axis="0.999048 0.005041 -0.043327" type="hinge" />
+                                    <geom name="g_e_cyl_l" pos="-0.293698 0.078504 -0.461442"
+                                        type="mesh" mesh="m_e_cyl_l" rgba="0 0 0.5 0.3" />
+                                    <body name="b_e_piston_l" pos="-0.001222 0.004618 -0.027643">
+                                        <joint name="j_E_LIN_L" axis="0.043613 -0.098326 0.994198"
+                                            type="slide" limited="true" range="-0.010 0.05710"
+                                            damping="50" />
+                                        <inertial pos="-0.00626674 0.013857 -0.140145"
+                                            quat="0.97977 0.043918 0.0328264 -0.19247"
+                                            mass="0.0867848"
+                                            diaginertia="0.000307826 0.000306721 1.14526e-05" />
+                                        <geom name="g_e_piston_l" pos="-0.292476 0.073886 -0.433799"
+                                            type="mesh" mesh="m_e_piston_l" />
+                                        <body name="b_weld_epitch_l" pos="-0.014689 0.024 -0.241">
+                                            <joint name="j_EPitch_free_l" type="hinge"
+                                                axis="0.999048 0.005041 -0.043327" />
+                                            <geom name="g_weld_epitch_l" type="box"
+                                                size=".02 .004 .004" rgba="0 1 1 1" mass="0.000001" />
+                                        </body>
+                                    </body>
+                                </body>
+                                <body name="b_end_arm_l" pos="-0.01 -0.012 -0.33">
+                                    <inertial pos="-0.00377304 -0.0347714 -0.0910382"
+                                        quat="0.695186 -0.104082 0.132951 0.698719" mass="0.297497"
+                                        diaginertia="0.00257635 0.00253151 0.000266139" />
+                                    <joint name="j_EPitch_L" axis="0.999048 0.005041 -0.043327"
+                                        type="hinge" damping="0.5" />
+                                    <geom name="g_end_arm_l" pos="-0.282924 0.020186 -0.219798"
+                                        type="mesh" mesh="m_end_arm_l" rgba="1 0 0 .5" />
+                                    <body name="b_end_arm_ball_l" pos="-0.0121 -0.1038 -0.29">
+                                        <geom name="g_end_arm_ball_l" type="sphere" size=".03"
+                                            rgba="0 1 1 1" mass="0.000001" />
+                                    </body>
+                                </body>
+                            </body>
+                        </body>
+                    </body>
+                    <body name="b_s_adapter_r" pos="-0.203976 0.051541 0.496393">
+                        <inertial pos="-0.0370055 -0.000452641 -0.00495741"
+                            quat="0.440293 0.49113 -0.563093 0.497855" mass="0.699962"
+                            diaginertia="0.0054197 0.00505806 0.00161023" />
+                        <joint name="j_SPitch_R" pos="0 0 0" axis="-0.991445 0.015085 -0.129652"
+                            type="hinge" limited="true" range="-1.57079 1.57079" damping="50" />
+                        <geom name="g_s_adapter_r" pos="0.203976 0.023135 -0.65399" type="mesh"
+                            mesh="m_s_adapter_r" />
+                        <body name="b_s_roll_r" pos="-0.074358 0.089535 0.000562">
+                            <inertial pos="-0.00456214 -0.0839035 -0.0368096"
+                                quat="0.677356 0.727663 0.077195 -0.075737" mass="2.24458"
+                                diaginertia="0.0100916 0.00815495 0.00630345" />
+                            <joint name="j_SRoll_R" pos="0 0 0" axis="0 -0.993299 -0.115571"
+                                type="hinge" limited="true" range="-2.094395 0.20944" damping="50" />
+                            <geom name="g_s_roll_r" pos="0.278334 -0.0664 -0.654552" type="mesh"
+                                mesh="m_s_roll_r" />
+                            <body name="b_s_yaw_r" pos="-0.008917 -0.07477 -0.103675">
+                                <inertial pos="0.0049883 -0.00445212 -0.115189"
+                                    quat="0.775146 -0.0323107 -0.000799129 0.630955" mass="2.05126"
+                                    diaginertia="0.0184676 0.0184369 0.00588456" />
+                                <joint name="j_SYaw_R" pos="0 0 0"
+                                    axis="-0.043619 -0.115461 0.992354" type="hinge" limited="true"
+                                    range="-0.87266 0.87266" damping="50" />
+                                <geom name="g_s_yaw_r" pos="0.287251 0.00837 -0.550877" type="mesh"
+                                    mesh="m_s_yaw_r" />
+                                <body name="b_e_cyl_r" pos="0.003468 -0.070284 -0.088138">
+                                    <inertial pos="0.00411998 0.00870934 -0.0929466"
+                                        quat="0.982497 0.185063 -0.0212049 0.0012667"
+                                        mass="0.231148"
+                                        diaginertia="0.0010665 0.000950448 0.000191053" />
+                                    <joint name="j_Rev62_e_cyl_r" pos="0 0 0"
+                                        axis="0.999048 -0.005041 0.043327" type="hinge" />
+                                    <geom name="g_e_cyl_r" pos="0.283783 0.078654 -0.462739"
+                                        type="mesh" mesh="m_e_cyl_r" rgba="0 0 0.5 0.3" />
+                                    <body name="b_e_piston_r" pos="0.001222 0.004618 -0.027643">
+                                        <joint name="j_E_LIN_R" axis="-0.043613 -0.098336 0.994197"
+                                            type="slide" limited="true" range="-0.010 0.05710"
+                                            damping="50" />
+                                        <inertial pos="0.00602968 0.0138591 -0.140156"
+                                            quat="0.98893 0.046147 -0.0270509 0.138409"
+                                            mass="0.0867848"
+                                            diaginertia="0.000307546 0.000306826 1.16279e-05" />
+                                        <geom name="g_e_piston_r" pos="0.282561 0.074036 -0.435096"
+                                            type="mesh" mesh="m_e_piston_r" />
+                                        <body name="b_weld_epitch_r" pos="0.014689 0.024 -0.241">
+                                            <joint name="j_EPitch_free_r" type="hinge"
+                                                axis="0.999048 -0.005041 0.043327" />
+                                            <geom name="g_weld_epitch_r" type="box"
+                                                size=".02 .004 .004" rgba="0 1 1 1" mass="0.000001" />
+                                        </body>
+                                    </body>
+                                </body>
+                                <body name="b_end_arm_r" pos="0.01 -0.012 -0.33">
+                                    <inertial pos="0.00377249 -0.0347723 -0.0910387"
+                                        quat="0.698719 -0.132951 0.104082 0.695186" mass="0.297497"
+                                        diaginertia="0.00257635 0.00253151 0.000266139" />
+                                    <joint name="j_EPitch_R" axis="0.999048 -0.005041 0.043327"
+                                        type="hinge" damping="0.5" />
+                                    <geom name="g_end_arm_r" pos="0.273009 0.020336 -0.221095"
+                                        type="mesh" mesh="m_end_arm_r" rgba="1 0 0 .4" />
+                                    <body name="b_end_arm_ball_r" pos="0.0121 -0.1038 -0.29">
+                                        <geom name="g_end_arm_ball_r" type="sphere" size=".03"
+                                            rgba="0 1 1 1" mass="0.000001" />
+                                    </body>
+                                </body>
+                            </body>
+                        </body>
+                    </body>
+                </body>
+            </body>
+            <body name="b_leg_adapter_l" pos="0.09 -0.07925 0">
+                <inertial pos="0.0459047 0.0956187 -0.045765"
+                    quat="0.637983 0.655217 -0.282873 0.289224" mass="1.2509"
+                    diaginertia="0.0054821 0.00521852 0.00282238" />
+                <joint name="j_HRoll_L" pos="0 0 0" axis="0 -1 0" type="hinge" limited="true"
+                    range="-0.52359 0.78539" damping="50" />
+                <geom name="g_leg_adapter_l" pos="-0.09 0.07925 0" type="mesh"
+                    mesh="m_leg_adapter_l" />
+                <body name="b_hip_yaw_l" pos="0.053995 0.1085 -0.098995">
+                    <inertial pos="0.000177646 -0.00999044 -0.0693225"
+                        quat="0.938251 0.345828 -0.00179383 -0.00920583" mass="1.64067"
+                        diaginertia="0.00614039 0.00537967 0.00412594" />
+                    <joint name="j_HYaw_L" pos="0 0 0" axis="0 0 1" type="hinge" limited="true"
+                        range="-0.43633 0.43633" damping="50" />
+                    <geom name="g_hip_yaw_l" pos="-0.143995 -0.02925 0.098995" type="mesh"
+                        mesh="m_hip_yaw_l" rgba="0 0 1 .2" />
+                    <body name="b_h_piston_l" pos="0 -0.089 -0.328">
+                        <inertial pos="-5.77882e-05 -0.0181295 0.171191"
+                            quat="0.998065 0.0524707 -0.00239759 0.0332732" mass="0.149647"
+                            diaginertia="0.000796008 0.000794431 2.75603e-05" />
+                        <joint name="j_Rev88_h_cyl_l" pos="0 -0.032 0.298" axis="1 0 0" type="hinge" />
+                        <geom name="g_h_piston_l" pos="-0.144495 0.0597 0.427256" type="mesh"
+                            mesh="m_h_piston_l" />
+                        <body name="b_h_cyl_l" pos="0 0.00495 -0.046739">
+                            <inertial pos="-0.000226962 -0.0195357 0.115677"
+                                quat="0.997923 0.0627685 0.00397027 -0.0139205" mass="0.325584"
+                                diaginertia="0.00201416 0.00189518 0.000287654" />
+                            <joint name="j_H_LIN_L" pos="0 0 0" axis="0 -0.10531 0.994439"
+                                type="slide" limited="true" range="-0.0905355 0.0151645"
+                                damping="50" />
+                            <geom name="g_h_cyl_l" pos="-0.144495 0.05475 0.473995" type="mesh"
+                                mesh="m_h_cyl_l" rgba="0 0 0.5 0.3" />
+                            <body name="b_weld_h_pitch_l" pos="0 0 0">
+                                <joint name="j_HPitch_free_L" type="hinge" axis="1 0 0" damping="10" />
+                                <geom name="g_weld_h_pitch_l" type="box" size=".01 .02 .03"
+                                    rgba="0 1 1 .1" mass="0.000001" />
+                            </body>
+                        </body>
+                    </body>
+                    <body name="b_thigh_l" pos="0.054 -0.0337 -0.055">
+                        <inertial pos="-0.0545001 -0.0199022 -0.178756"
+                            quat="0.70582 -0.0426418 0.0426418 0.70582" mass="1.91939"
+                            diaginertia="0.0232006 0.020492 0.00736143" />
+                        <joint name="j_HPitch_L" pos="0 0 0" axis="1 0 0" type="hinge" />
+                        <geom name="g_thigh_l" pos="-0.198995 0.00475 0.153995" type="mesh"
+                            mesh="m_thigh_l" />
+                        <site name="knee_l_site" pos="-0.054 0 -0.315" type="sphere" size="0.06"
+                            rgba="1 1 0 0.3" />
+                        <body name="b_k_cyl_l" pos="-0.0545 -.002 -0.125">
+                            <inertial pos="-2.97235e-05 0.0206875 -0.0956294"
+                                quat="0.996629 0.0820395 -0.000559422 0.000733071" mass="0.285911"
+                                diaginertia="0.001237 0.0011317 0.000245296" />
+                            <joint name="j_Rev84_k_cyl_l" pos="0 0 0" axis="-1 0 0" type="hinge" />
+                            <geom name="g_k_cyl_l" pos="-0.144495 0.00675 0.278995" type="mesh"
+                                mesh="m_k_cyl_l" rgba="0 0 0.5 0.3" />
+                            <body name="b_k_piston_l" pos="0 0.006587 -0.046536">
+                                <inertial pos="-6.50458e-05 0.0201422 -0.142346"
+                                    quat="0.996856 0.0697515 0.00379265 -0.0373886" mass="0.126617"
+                                    diaginertia="0.000447013 0.000445151 2.48358e-05" />
+                                <joint name="j_K_LIN_L" pos="0 0 0" axis="0 -0.140141 0.990132"
+                                    type="slide" limited="true" range="0.0 0.077441" damping="50" />
+                                <!-- damping="50" -->
+                                <geom name="g_k_piston_l" pos="-0.144495 0.000163 0.325531"
+                                    type="mesh" mesh="m_k_piston_l" />
+                                <body name="b_knee_pitch_weld_l" pos="0 .034 -0.243">
+                                    <joint name="j_knee_piston_conn_l" pos="0 0 0" axis="1 0 0"
+                                        type="hinge" damping="10" />
+                                    <geom name="g_knee_pitch_weld_l" type="box" size=".01 .02 .03"
+                                        rgba="0 1 1 .1" mass="0.000001" />
+                                </body>
+                            </body>
+                        </body>
+                        <body name="b_calf_l" pos="-0.054 -.000 -0.375">
+                            <!-- pos="-0.0545 0 -0.375" -->
+                            <inertial pos="-3.93606e-05 -0.0104904 -0.134459"
+                                quat="0.706684 0.0199592 -0.0201719 0.70696" mass="1.72048"
+                                diaginertia="0.0250869 0.023294 0.00586012" />
+                            <joint name="j_Knee_L" pos="0 0 0" axis="1 0 0" type="hinge"
+                                range="0 1.57" />
+                            <geom name="g_calf_l" pos="-0.144495 0.00475 0.528995" type="mesh"
+                                mesh="m_calf_l" rgba=".2 .2 .2 .5" />
+                            <body name="b_acyl_lo" pos="0.0205 -0.03 -0.06">
+                                <inertial pos="-1.4807e-05 0.0247397 -0.0673517"
+                                    quat="0.996501 -0.0835866 0 0" mass="0.128787"
+                                    diaginertia="0.000369 0.000268055 0.000121945" />
+                                <joint name="j_Rev26_acyl_lo" pos="0 0 0" axis="-1 0 0" type="hinge" />
+                                <geom name="g_acyl_lo" pos="-0.164995 0.03475 0.588995" type="mesh"
+                                    mesh="m_acyl_lo" rgba="0 0 0.5 0.3" />
+                                <body name="b_a_piston_lo" pos="0 0.002203 -0.032425">
+                                    <inertial pos="5.41891e-05 0.00522387 -0.0768887"
+                                        quat="0.999465 0.032701 0 0" mass="0.0378377"
+                                        diaginertia="8e-05 7.93275e-05 2.67246e-06" />
+                                    <joint name="j_APITCH_LO" pos="0 0 0"
+                                        axis="0 -0.067772 0.997701" type="slide" limited="true"
+                                        range="-0.1 0.1" damping="15" />
+                                    <!-- Found max APITCH_L range= "-0.802087 0.413268" -->
+                                    <!-- Cylinder Range: range="-0.0265 0.0084" -->
+                                    <geom name="g_a_piston_lo" pos="-0.164995 0.032547 0.62142"
+                                        type="mesh" mesh="m_a_piston_lo" />
+                                    <body name="b_crank_lo" pos="0 0.051958 -0.157575">
+                                        <!-- pos="0.0205 0.024161 -0.25" -->
+                                        <inertial pos="-5.06345e-08 -0.0363894 -0.000874521"
+                                            quat="0.671365 0.741127 0 0" mass="0.0576547"
+                                            diaginertia="7.6e-05 7.35941e-05 1.24059e-05" />
+                                        <joint name="j_Rev76_crank_lo" pos="0 -0.0423 0.0154"
+                                            axis="1 0 0" type="hinge" />
+                                        <geom name="g_crank_lo" pos="-0.164995 -0.019411 0.778995"
+                                            type="mesh" mesh="m_crank_lo" />
+                                        <body name="b_crank_weld_lo" pos="0 0 0">
+                                            <joint name="j_crank_weld_lo" pos="0 0 0" axis="1 0 0"
+                                                type="hinge" damping="10" />
+                                            <geom name="g_crank_weld_lo" type="box"
+                                                size=".01 .02 .03" rgba="0 1 1 .1" mass="0.000001" />
+                                        </body>
+                                        <body name="b_inner_weld_tf_lo" pos="0 -0.089434 -0.010081">
+                                            <joint name="j_inner_weld_tf_lo" type="hinge"
+                                                axis="0 0 1" limited="true" range="-0.1 0.1" />
+                                            <geom name="g_inner_weld_tf_lo" type="cylinder"
+                                                size="0.01 0.02" rgba=" 0 1 0 .4" zaxis="0 0 1" />
+                                            <body name="b_middle_weld_tf_lo" pos="0 0 0">
+                                                <joint name="j_middle_weld_tf_lo" type="hinge"
+                                                    axis="0 -1 0" />
+                                                <geom name="g_middle_weld_tf_lo" type="cylinder"
+                                                    size="0.01 0.02" rgba=" 0 1 0 .4" zaxis="0 1 0" />
+                                                <body name="b_tf_lo" pos="0 0 0">
+                                                    <inertial
+                                                        pos="-5.02339e-08 -0.00232074 -0.0699611"
+                                                        quat="0.999844 -0.0176465 0 0"
+                                                        mass="0.0807558"
+                                                        diaginertia="0.000213 0.000207247 8.75283e-06" />
+                                                    <joint name="j_Rev78_tf_lo" type="hinge"
+                                                        axis="1 0 0" />
+                                                    <geom name="g_tf_lo"
+                                                        pos="-0.164995 0.070023 0.789076"
+                                                        type="mesh" mesh="m_tf_lo" />
+                                                    <body name="b_outer_weld_tf_lo"
+                                                        pos="0 -0.0047 -0.14">
+                                                        <joint name="j_weld_tf_lo" type="ball" />
+                                                        <geom name="g_outer_weld_tf_lo"
+                                                            type="sphere" size="0.01"
+                                                            rgba=" 0 1 0 .4" />
+                                                    </body>
+                                                </body>
+                                            </body>
+                                        </body>
+                                    </body>
+                                </body>
+                            </body>
+                            <body name="b_acyl_li" pos="-0.0205 -0.03 -0.06">
+                                <inertial pos="-1.4807e-05 0.0247397 -0.0673517"
+                                    quat="0.996501 -0.0835866 0 0" mass="0.128787"
+                                    diaginertia="0.000369 0.000268055 0.000121945" />
+                                <joint name="j_Rev27_acyl_li" pos="0 0 0" axis="-1 0 0" type="hinge" />
+                                <geom name="g_acyl_li" pos="-0.123995 0.03475 0.588995" type="mesh"
+                                    mesh="m_acyl_li" rgba="0 1 1 0.3" />
+                                <body name="b_a_piston_li" pos="0 0.002203 -0.032425">
+                                    <inertial pos="5.41891e-05 0.00522387 -0.0768887"
+                                        quat="0.999465 0.032701 0 0" mass="0.0378377"
+                                        diaginertia="8e-05 7.93275e-05 2.67246e-06" />
+                                    <joint name="j_APITCH_LI" pos="0 0 0"
+                                        axis="0 -0.067772 0.997701" type="slide" limited="true"
+                                        range="-0.1 0.1" damping="15" />
+                                    <!-- Found max APITCH_L range= "-0.802087 0.413268" -->
+                                    <!-- old range="-0.0115435 0.0274565" -->
+                                    <!-- Cylinder Range: range="-0.0265 0.0084" -->
+                                    <geom name="g_a_piston_li" pos="-0.123995 0.032547 0.62142"
+                                        type="mesh" mesh="m_a_piston_li" />
+                                    <body name="b_crank_li" pos="0 0.051958 -0.157575">
+                                        <!-- pos="-0.0205 0.024161 -0.25" -->
+                                        <inertial pos="-5.06345e-08 -0.0363894 -0.000874521"
+                                            quat="0.671365 0.741127 0 0" mass="0.0576547"
+                                            diaginertia="7.6e-05 7.35941e-05 1.24059e-05" />
+                                        <joint name="j_Rev77_crank_li" pos="0 -0.0423 0.0154"
+                                            axis="-1 0 0" type="hinge" />
+                                        <geom name="g_crank_li" pos="-0.123995 -0.019411 0.778995"
+                                            type="mesh" mesh="m_crank_li" />
+                                        <body name="b_crank_weld_li" pos="0 0 0">
+                                            <joint name="j_crank_weld_li" pos="0 0 0" axis="-1 0 0"
+                                                type="hinge" damping="10" />
+                                            <geom name="g_crank_weld_li" type="box"
+                                                size=".01 .02 .03" rgba="0 1 1 .1" mass="0.000001" />
+                                        </body>
+                                        <body name="b_inner_weld_tf_li" pos="0 -0.089434 -0.010081">
+                                            <joint name="j_inner_weld_tf_li" type="hinge"
+                                                axis="0 0 1" limited="true" range="-0.1 0.1" />
+                                            <geom name="g_inner_weld_tf_li" type="cylinder"
+                                                size="0.01 0.02" rgba=" 0 1 0 .4" zaxis="0 0 1" />
+                                            <body name="b_middle_weld_tf_li" pos="0 0 0">
+                                                <joint name="j_middle_weld_tf_li" type="hinge"
+                                                    axis="0 -1 0" />
+                                                <geom name="g_middle_weld_tf_li" type="cylinder"
+                                                    size="0.01 0.02" rgba=" 0 1 0 .4" zaxis="0 1 0" />
+                                                <body name="b_tf_li" pos="0 0 0">
+                                                    <inertial
+                                                        pos="-5.02339e-08 -0.00232074 -0.0699611"
+                                                        quat="0.999844 -0.0176465 0 0"
+                                                        mass="0.0807558"
+                                                        diaginertia="0.000213 0.000207247 8.75283e-06" />
+                                                    <joint name="j_Rev79_tf_li" pos="0 0 0"
+                                                        type="hinge" axis="-1 0 0" />
+                                                    <geom name="g_tf_li"
+                                                        pos="-0.123995 0.070023 0.789076"
+                                                        type="mesh" mesh="m_tf_li" />
+                                                    <body name="b_outer_weld_tf_li"
+                                                        pos="0 -0.0047 -0.14">
+                                                        <joint name="j_weld_tf_li" type="ball" />
+                                                        <geom name="g_outer_weld_tf_li"
+                                                            type="sphere" size="0.01"
+                                                            rgba=" 0 1 0 .4" />
+                                                    </body>
+                                                </body>
+                                            </body>
+                                        </body>
+                                    </body>
+                                </body>
+                            </body>
+                            <body name="b_a_commutator_l" pos="0 0 -0.4">
+                                <inertial pos="-5.06338e-08 0 5.06339e-08"
+                                    quat="0 0.707107 0 0.707107" mass="0.0528451"
+                                    diaginertia="2.7e-05 1.7e-05 1.5e-05" />
+                                <joint name="j_APitch_L" pos="0 0 0" axis="-1 0 0" type="hinge"
+                                    limited="true" range="-0.802087 0.413268" />
+                                <!-- Found max APITCH_L range= "-0.802087 0.413268" -->
+                                <!-- Full actuated range="-0.802087 0.413268" -->
+                                <geom name="g_a_commutator_l" pos="-0.144495 0.00475 0.928995"
+                                    type="mesh" mesh="m_a_commutator_l" />
+                                <body name="b_foot_l" pos="0 0 0">
+                                    <inertial pos="0.000690714 -0.0558991 -0.0396183"
+                                        quat="0.491476 0.5203 -0.512834 0.474068" mass="0.442364"
+                                        diaginertia="0.00208294 0.00191408 0.000358977" />
+                                    <joint name="j_ARoll_L" pos="0 0 0" axis="0 -1 0" type="hinge"
+                                        limited="true" range="-0.4 0.4" />
+                                    <geom name="g_foot_l" pos="-0.144495 0.00475 0.928995"
+                                        type="mesh" mesh="m_foot_l" />
+                                    <body name="b_foot_end_eff_l" pos="0 -0.1 -0.02">
+                                        <geom name="g_foot_end_eff_l" type="box" size=".03 .08 .02"
+                                            rgba="0 1 1 .3" mass="0.000001" />
+                                        <site name="foot_l_site" />
+                                    </body>
+                                </body>
+                            </body>
+                        </body>
+                    </body>
+                </body>
+            </body>
+            <body name="b_leg_adapter_r" pos="-0.09 -0.07925 0">
+                <inertial pos="-0.0459413 0.0956771 -0.045823"
+                    quat="0.289831 0.283486 -0.654958 0.637702" mass="1.2566"
+                    diaginertia="0.00548365 0.00521997 0.00282638" />
+                <joint name="j_HRoll_R" pos="0 0 0" axis="0 -1 0" type="hinge" limited="true"
+                    range="-0.78539 0.52359" damping="50" />
+                <geom name="g_leg_adapter_r" pos="0.09 0.07925 0" type="mesh" mesh="m_leg_adapter_r" />
+                <body name="b_hip_yaw_r" pos="-0.053995 0.1085 -0.098995">
+                    <inertial pos="0.000177748 -0.00999044 -0.0693225"
+                        quat="0.938251 0.345828 -0.00179383 -0.00920583" mass="1.64067"
+                        diaginertia="0.00614039 0.00537967 0.00412594" />
+                    <joint name="j_HYaw_R" pos="0 0 0" axis="0 0 1" type="hinge" limited="true"
+                        range="-0.43633 0.43633" damping="50" />
+                    <geom name="g_hip_yaw_r" pos="0.143995 -0.02925 0.098995" type="mesh"
+                        mesh="m_hip_yaw_r" rgba="0 0 1 .2" />
+                    <body name="b_h_piston_r" pos="0 -0.089 -0.328">
+                        <inertial pos="-5.7687e-05 -0.0181295 0.171191"
+                            quat="0.998065 0.0524707 -0.00239759 0.0332732" mass="0.149647"
+                            diaginertia="0.000796008 0.000794431 2.75603e-05" />
+                        <joint name="j_Rev90_h_cyl_r" pos="0 -0.032 0.298" axis="1 0 0" type="hinge" />
+                        <geom name="g_h_piston_r" pos="0.144495 0.0597 0.427256" type="mesh"
+                            mesh="m_h_piston_r" />
+                        <body name="b_h_cyl_r" pos="0 0.00495 -0.046739">
+                            <inertial pos="-0.000226861 -0.0195357 0.115677"
+                                quat="0.997923 0.0627685 0.00397027 -0.0139205" mass="0.325584"
+                                diaginertia="0.00201416 0.00189518 0.000287654" />
+                            <joint name="j_H_LIN_R" pos="0 0 0" axis="0 -0.10531 0.994439"
+                                type="slide" limited="true" range="-0.0905355 0.0151645"
+                                damping="50" />
+                            <geom name="g_h_cyl_r" pos="0.144495 0.05475 0.473995" type="mesh"
+                                mesh="m_h_cyl_r" rgba="0 0 0.5 0.3" />
+                            <body name="b_weld_h_pitch_r" pos="0 0 0">
+                                <joint name="j_HPitch_free_R" type="hinge" axis="1 0 0" damping="10" />
+                                <geom name="g_weld_h_pitch_r" type="box" size=".01 .02 .03"
+                                    rgba="0 1 1 .1" mass="0.000001" />
+                            </body>
+                        </body>
+                    </body>
+                    <body name="b_thigh_r" pos="-0.054 -0.0337 -0.055">
+                        <inertial pos="0.0545 -0.0199022 -0.178756"
+                            quat="0.70582 -0.0426418 0.0426418 0.70582" mass="1.91939"
+                            diaginertia="0.0232006 0.020492 0.00736143" />
+                        <joint name="j_HPitch_R" pos="0 0 0" axis="1 0 0" type="hinge" />
+                        <geom name="g_thigh_r" pos="0.198995 0.00475 0.153995" type="mesh"
+                            mesh="m_thigh_r" />
+                        <site name="knee_r_site" pos="0.054 0 -0.315" type="sphere" size="0.06"
+                            rgba="1 1 0 0.3" />
+                        <body name="b_k_cyl_r" pos="0.0545 -.002 -0.125">
+                            <inertial pos="-2.96762e-05 0.0208376 -0.0951231"
+                                quat="0.997129 0.0757158 -0.00054397 0.000623813" mass="0.285571"
+                                diaginertia="0.001252 0.00113816 0.000253836" />
+                            <joint name="j_Rev86_k_cyl_r" pos="0 0 0" axis="-1 0 0" type="hinge" />
+                            <geom name="g_k_cyl_r" pos="0.144495 0.00675 0.278995" type="mesh"
+                                mesh="m_k_cyl_r" rgba="0 0 0.5 0.3" />
+                            <body name="b_k_piston_r" pos="0 0.006587 -0.046536">
+                                <inertial pos="-6.49445e-05 0.0201422 -0.142346"
+                                    quat="0.996856 0.0697515 0.00379265 -0.0373886" mass="0.126617"
+                                    diaginertia="0.000447013 0.000445151 2.48358e-05" />
+                                <joint name="j_K_LIN_R" pos="0 0 0" axis="0 -0.140141 0.990132"
+                                    type="slide" limited="true" range="0.0 0.077441" damping="50" />
+                                <!-- damping="50" -->
+                                <geom name="g_k_piston_r" pos="0.144495 0.000163 0.325531"
+                                    type="mesh" mesh="m_k_piston_r" />
+                                <body name="b_knee_pitch_weld_r" pos="0 .034 -0.243">
+                                    <joint name="j_knee_piston_conn_r" pos="0 0 0" axis="1 0 0"
+                                        type="hinge" damping="10" />
+                                    <geom name="g_knee_pitch_weld_r" type="box" size=".01 .02 .03"
+                                        rgba="0 1 1 .1" mass="0.000001" />
+                                </body>
+                            </body>
+                        </body>
+                        <body name="b_calf_r" pos="0.054 -.000 -0.375">
+                            <inertial pos="-3.92593e-05 -0.0104904 -0.134459"
+                                quat="0.706684 0.0199592 -0.0201719 0.70696" mass="1.72048"
+                                diaginertia="0.0250869 0.023294 0.00586012" />
+                            <joint name="j_Knee_R" pos="0 0 0" axis="1 0 0" type="hinge"
+                                range="0 1.57" />
+                            <geom name="g_calf_r" pos="0.144495 0.00475 0.528995" type="mesh"
+                                mesh="m_calf_r" rgba="0 .1 .3 .3" />
+                            <body name="b_acyl_ri" pos="0.0205 -0.03 -0.06">
+                                <inertial pos="-1.47058e-05 0.0247397 -0.0673517"
+                                    quat="0.996501 -0.0835866 0 0" mass="0.128787"
+                                    diaginertia="0.000369 0.000268055 0.000121945" />
+                                <joint name="j_Rev28_acyl_ri" pos="0 0 0" axis="-1 0 0" type="hinge" />
+                                <geom name="g_acyl_ri" pos="0.123995 0.03475 0.588995" type="mesh"
+                                    mesh="m_acyl_ri" rgba="0 1 1 0.3" />
+                                <body name="b_a_piston_ri" pos="0 0.002203 -0.032425">
+                                    <inertial pos="5.42903e-05 0.00522392 -0.0768887"
+                                        quat="0.999465 0.032701 0 0" mass="0.0378377"
+                                        diaginertia="8e-05 7.93275e-05 2.67246e-06" />
+                                    <joint name="j_APITCH_RI" pos="0 0 0"
+                                        axis="0 -0.067772 0.997701" type="slide" limited="true"
+                                        range="-0.1 0.1" damping="15" />
+                                    <geom name="g_a_piston_ri" pos="0.123995 0.032547 0.62142"
+                                        type="mesh" mesh="m_a_piston_ri" />
+                                    <body name="b_crank_ri" pos="0 0.051958 -0.157575">
+                                        <inertial pos="5.06332e-08 -0.0363894 -0.000874521"
+                                            quat="0.671365 0.741127 0 0" mass="0.0576547"
+                                            diaginertia="7.6e-05 7.35941e-05 1.24059e-05" />
+                                        <joint name="j_Rev72_crank_ri" pos="0 -0.0423 0.0154"
+                                            axis="1 0 0" type="hinge" />
+                                        <geom name="g_crank_ri" pos="0.123995 -0.019411 0.778995"
+                                            type="mesh" mesh="m_crank_ri" />
+                                        <body name="b_crank_weld_ri" pos="0 0 0">
+                                            <joint name="j_crank_weld_ri" pos="0 0 0" axis="1 0 0"
+                                                type="hinge" damping="10" />
+                                            <geom name="g_crank_weld_ri" type="box"
+                                                size=".01 .02 .03" rgba="0 1 1 .1" mass="0.000001" />
+                                        </body>
+                                        <body name="b_inner_weld_tf_ri" pos="0 -0.089434 -0.010081">
+                                            <joint name="j_inner_weld_tf_ri" type="hinge"
+                                                axis="0 0 1" limited="true" range="-0.1 0.1" />
+                                            <geom name="g_inner_weld_tf_ri" type="cylinder"
+                                                size="0.01 0.02" rgba=" 0 1 0 .4" zaxis="0 0 1" />
+                                            <body name="b_middle_weld_tf_ri">
+                                                <joint name="j_middle_weld_tf_ri" type="hinge"
+                                                    axis="0 -1 0" />
+                                                <geom name="g_middle_weld_tf_ri" type="cylinder"
+                                                    size="0.01 0.02" rgba=" 0 1 0 .4" zaxis="0 1 0" />
+                                                <body name="b_tf_ri">
+                                                    <inertial
+                                                        pos="5.10338e-08 -0.00232074 -0.0699611"
+                                                        quat="0.999844 -0.0176465 0 0"
+                                                        mass="0.0807558"
+                                                        diaginertia="0.000213 0.000207247 8.75283e-06" />
+                                                    <joint name="j_Rev73_tf_ri" pos="0 0 0"
+                                                        axis="1 0 0" type="hinge" />
+                                                    <geom name="g_tf_ri"
+                                                        pos="0.123995 0.070023 0.789076" type="mesh"
+                                                        mesh="m_tf_ri" />
+                                                    <body name="b_outer_weld_tf_ri"
+                                                        pos="0 -0.0047 -0.14">
+                                                        <joint name="j_weld_tf_ri" type="ball" />
+                                                        <geom name="g_outer_weld_tf_i" type="sphere"
+                                                            size="0.01" rgba=" 0 1 0 .4" />
+                                                    </body>
+                                                </body>
+                                            </body>
+                                        </body>
+                                    </body>
+                                </body>
+                            </body>
+                            <body name="b_acyl_ro" pos="-0.0205 -0.03 -0.06">
+                                <inertial pos="-1.47058e-05 0.0247397 -0.0673517"
+                                    quat="0.996501 -0.0835866 0 0" mass="0.128787"
+                                    diaginertia="0.000369 0.000268055 0.000121945" />
+                                <joint name="j_Rev29_acyl_ro" pos="0 0 0" axis="-1 0 0" type="hinge" />
+                                <geom name="g_acyl_ro" pos="0.164995 0.03475 0.588995" type="mesh"
+                                    mesh="m_acyl_ro" rgba="0 0 0.5 0.3" />
+                                <body name="b_a_piston_ro" pos="0 0.002203 -0.032425">
+                                    <inertial pos="5.42903e-05 0.00522387 -0.0768887"
+                                        quat="0.999465 0.032701 0 0" mass="0.0378377"
+                                        diaginertia="8e-05 7.93275e-05 2.67246e-06" />
+                                    <joint name="j_APITCH_RO" pos="0 0 0"
+                                        axis="0 -0.067772 0.997701" type="slide" limited="true"
+                                        range="-0.1 0.1" damping="15" />
+                                    <!-- old range="range="-0.0115435 0.0274565" -->
+                                    <geom name="g_a_piston_ro" pos="0.164995 0.032547 0.62142"
+                                        type="mesh" mesh="m_a_piston_ro" />
+                                    <body name="b_crank_ro" pos="0 0.051958 -0.157575">
+                                        <!-- pos="-0.0205 0.024161 -0.25" -->
+                                        <inertial pos="5.06332e-08 -0.0363894 -0.000874521"
+                                            quat="0.671365 0.741127 0 0" mass="0.0576547"
+                                            diaginertia="7.6e-05 7.35941e-05 1.24059e-05" />
+                                        <joint name="j_Rev75_crank_ro" pos="0 -0.0423 0.0154"
+                                            axis="-1 0 0" type="hinge" />
+                                        <geom name="g_crank_ro" pos="0.164995 -0.019411 0.778995"
+                                            type="mesh" mesh="m_crank_ro" />
+                                        <body name="b_crank_weld_ro" pos="0 0 0">
+                                            <joint name="j_crank_weld_ro" pos="0 0 0" axis="-1 0 0"
+                                                type="hinge" damping="10" />
+                                            <geom name="g_crank_weld_ro" type="box"
+                                                size=".01 .02 .03" rgba="0 1 1 .1" mass="0.000001" />
+                                        </body>
+                                        <body name="b_inner_weld_tf_ro" pos="0 -0.089434 -0.010081">
+                                            <joint name="j_inner_weld_tf_ro" type="hinge"
+                                                axis="0 0 1" limited="true" range="-0.1 0.1" />
+                                            <geom name="g_inner_weld_tf_ro" type="cylinder"
+                                                size="0.01 0.02" rgba=" 0 1 0 .4" zaxis="0 0 1" />
+                                            <body name="b_middle_weld_tf_ro" pos="0 0 0">
+                                                <joint name="j_middle_weld_tf_ro" type="hinge"
+                                                    axis="0 -1 0" />
+                                                <geom name="g_middle_weld_tf_ro" type="cylinder"
+                                                    size="0.01 0.02" zaxis="0 1 0" rgba=" 0 1 0 .4" />
+                                                <body name="b_tf_ro" pos="0 0 0">
+                                                    <inertial
+                                                        pos="5.10338e-08 -0.00232074 -0.0699611"
+                                                        quat="0.999844 -0.0176465 0 0"
+                                                        mass="0.0807558"
+                                                        diaginertia="0.000213 0.000207247 8.75283e-06" />
+                                                    <joint name="j_Rev74_tf_ro" axis="-1 0 0"
+                                                        type="hinge" />
+                                                    <geom name="g_tf_ro"
+                                                        pos="0.164995 0.070023 0.789076" type="mesh"
+                                                        mesh="m_tf_ro" />
+                                                    <body name="b_outer_weld_tf_ro"
+                                                        pos="0 -0.0047 -0.14">
+                                                        <joint name="j_weld_tf_ro" type="ball" />
+                                                        <geom name="g_outer_weld_tf_ro"
+                                                            type="sphere" size="0.01"
+                                                            rgba=" 0 1 0 .4" />
+                                                    </body>
+                                                </body>
+                                            </body>
+                                        </body>
+                                    </body>
+                                </body>
+                            </body>
+                            <body name="b_a_commutator_r" pos="0 0 -0.4">
+                                <inertial pos="5.06339e-08 0 5.06339e-08"
+                                    quat="0 0.707107 0 0.707107" mass="0.0528451"
+                                    diaginertia="2.7e-05 1.7e-05 1.5e-05" />
+                                <joint name="j_APitch_R" pos="0 0 0" axis="1 0 0" type="hinge"
+                                    limited="true" range="-0.413268 0.802087 " /> <!--
+                                range="-0.802087 0.413268" -->
+                                <geom name="g_a_commutator_r" pos="0.144495 0.00475 0.928995"
+                                    type="mesh" mesh="m_a_commutator_r" />
+                                <body name="b_foot_r" pos="0 0 0">
+                                    <inertial pos="-0.000690715 -0.0558992 -0.0396184"
+                                        quat="0.474068 0.512834 -0.5203 0.491476" mass="0.442363"
+                                        diaginertia="0.00208294 0.00191408 0.000358977" />
+                                    <joint name="j_ARoll_R" pos="0 0 0" axis="0 -1 0" type="hinge"
+                                        limited="true" range="-0.2 0.2" />
+                                    <geom name="g_foot_r" pos="0.144495 0.00475 0.928995"
+                                        type="mesh" mesh="m_foot_r" />
+                                    <body name="b_foot_end_eff_r" pos="0 -0.1 -0.02">
+                                        <geom name="g_foot_end_eff_r" type="box" size=".03 .08 .02"
+                                            rgba="0 1 1 .3" mass="0.000001" />
+                                        <site name="foot_r_site" />
+                                    </body>
+                                </body>
+                            </body>
+                        </body>
+                    </body>
+                </body>
+            </body>
+        </body>
+
+    </worldbody>
+
+    <equality>
+        <weld name="weld_epitch_l" body1="b_end_arm_l" body2="b_weld_epitch_l"
+            relpose="0 -.03 -.027 1 0 0 0" torquescale="0" />
+        <weld name="weld_epitch_r" body1="b_end_arm_r" body2="b_weld_epitch_r"
+            relpose="0 -.03 -.027 1 0 0 0" torquescale="0" />
+
+        <weld name="weld_hpitch_l" body1="b_thigh_l" body2="b_weld_h_pitch_l"
+            relpose="-0.054 -0.05 -0.32 1 0 0 0" torquescale="0" />
+        <weld name="weld_hpitch_r" body1="b_thigh_r" body2="b_weld_h_pitch_r"
+            relpose="0.054 -0.05 -0.32 1 0 0 0" torquescale="0" />
+        <weld name="weld_kpitch_l" body1="b_calf_l" body2="b_knee_pitch_weld_l"
+            relpose="0 .038 -.04 1 0 0 0" torquescale="0" />
+        <weld name="weld_kpitch_r" body1="b_calf_r" body2="b_knee_pitch_weld_r"
+            relpose="0 .038 -.04 1 0 0 0" torquescale="0" />
+
+        <weld name="weld_apitch_lo" body1="b_calf_l" body2="b_crank_weld_lo"
+            relpose="0.0205 0.024161 -0.25 1 0 0 0" torquescale="0" />
+        <weld name="weld_apitch_li" body1="b_calf_l" body2="b_crank_weld_li"
+            relpose="-0.0205 0.024161 -0.25 1 0 0 0" torquescale="0" />
+
+        <weld name="weld_a_tf_lo" body1="b_foot_l" body2="b_outer_weld_tf_lo"
+            relpose="0.0205 -0.07 0 1 0 0 0" torquescale="0" />
+        <weld name="weld_a_tf_li" body1="b_foot_l" body2="b_outer_weld_tf_li"
+            relpose="-0.0205 -0.07 0 1 0 0 0" torquescale="0" />
+
+        <weld name="weld_apitch_ro" body1="b_calf_r" body2="b_crank_weld_ro"
+            relpose="0.0205 0.024161 -0.25 1 0 0 0" torquescale="0" />
+        <weld name="weld_apitch_ri" body1="b_calf_r" body2="b_crank_weld_ri"
+            relpose="-0.0205 0.024161 -0.25 1 0 0 0" torquescale="0" />
+
+        <weld name="weld_a_tf_ro" body1="b_foot_r" body2="b_outer_weld_tf_ro"
+            relpose="-0.0205 -0.07 0 1 0 0 0" torquescale="0" />
+        <weld name="weld_a_tf_ri" body1="b_foot_r" body2="b_outer_weld_tf_ri"
+            relpose="0.0205 -0.07 0 1 0 0 0" torquescale="0" />
+    </equality>
+
+    <actuator>
+        <!-- TORSO -->
+        <position name="rjax_act_TYaw" joint="j_TYaw" kp="1e6" forcerange="-70 70"
+            ctrlrange="-0.78539 0.78539" />
+        <position name="rjax_act_TRoll" joint="j_TRoll" kp="1e7" forcerange="-70 70"
+            ctrlrange="-0.08 0.08" />
+        <!-- LEFT: SHOULDER AND ELBOW-->
+        <position name="rjax_act_SPitch_L" joint="j_SPitch_L" kp="1e5" forcerange="-130 130"
+            ctrlrange="-1.57079 1.57079" />
+        <position name="rjax_act_SRoll_L" joint="j_SRoll_L" kp="1e5" forcerange="-130 130"
+            ctrlrange="-0.20944 2.094395" />
+        <position name="rjax_act_SYaw_L" joint="j_SYaw_L" kp="1e3" forcerange="-70 70"
+            ctrlrange="-0.87266 0.87266" />
+        <position name="rjax_act_EPitch_L" joint="j_E_LIN_L" kp="1e5" forcerange="-800 300"
+            ctrlrange="-0.01 0.0571" />
+        <!-- RIGHT: SHOULDER AND ELBOW -->
+        <position name="rjax_act_SPitch_R" joint="j_SPitch_R" kp="1e5" forcerange="-130 130"
+            ctrlrange="-1.57079 1.57079" />
+        <position name="rjax_act_SRoll_R" joint="j_SRoll_R" kp="1e5" forcerange="-130 130"
+            ctrlrange="-2.094395 0.20944" />
+        <position name="rjax_act_SYaw_R" joint="j_SYaw_R" kp="1e3" forcerange="-70 70"
+            ctrlrange="-0.87266 0.87266" />
+        <position name="rjax_act_EPitch_R" joint="j_E_LIN_R" kp="1e5" forcerange="-800 300"
+            ctrlrange="-0.01 0.0571" />
+        <!-- LEFT LEG -->
+        <position name="rjax_act_HRoll_L" joint="j_HRoll_L" kp="1e3" forcerange="-130 130"
+            ctrlrange="-0.52359 0.78539" />
+        <position name="rjax_act_HYaw_L" joint="j_HYaw_L" kp="1e3" forcerange="-70 70"
+            ctrlrange="-0.43633 0.43633" />
+        <position name="rjax_act_HPitch_L" joint="j_H_LIN_L" kp="1e5" forcerange="-1000 1000"
+            ctrlrange="-0.0151645 0.0905355" />
+        <position name="rjax_act_Knee_L" joint="j_K_LIN_L" kp="1e4" forcerange="-1000 1000"
+            ctrlrange="0.0 0.077441" />
+        <position name="rjax_act_APITCH_LO" joint="j_APITCH_LO" kp="1e2" forcerange="-500 500"
+            ctrlrange="-0.1 0.1" />
+        <position name="rjax_act_APITCH_LI" joint="j_APITCH_LI" kp="1e2" forcerange="-500 500"
+            ctrlrange="-0.1 0.1" />
+        <!-- RIGHT LEG -->
+        <position name="rjax_act_HRoll_R" joint="j_HRoll_R" kp="1e3" forcerange="-130 130"
+            ctrlrange="-0.78539 0.52359" />
+        <position name="rjax_act_HYaw_R" joint="j_HYaw_R" kp="1e3" forcerange="-70 70"
+            ctrlrange="-0.43633 0.43633" />
+        <position name="rjax_act_HPitch_R" joint="j_H_LIN_R" kp="1e5" forcerange="-1000 1000"
+            ctrlrange="-0.0151645 0.0905355" />
+        <position name="rjax_act_Knee_R" joint="j_K_LIN_R" kp="1e4" forcerange="-1000 1000"
+            ctrlrange="0.0 0.077441" />
+        <position name="rjax_act_APITCH_RO" joint="j_APITCH_RO" kp="1e2" forcerange="-500 500"
+            ctrlrange="-0.1 0.1" />
+        <position name="rjax_act_APITCH_RI" joint="j_APITCH_RI" kp="1e2" forcerange="-500 500"
+            ctrlrange="-0.1 0.1" />
+    </actuator>
+
+    <!-- RJAX CONTACT PAIRS -->
+    <contact>
+        <!-- RJAX -->
+        <!-- MAIN BODY -->
+        <!-- <pair name="cp_torso_mid" geom1="floor" geom2="g_torso_mid" /> -->
+        <pair name="cp_main_body" geom1="floor" geom2="g_main_body" />
+        <!-- <pair name="cp_base_link" geom1="floor" geom2="g_base_link" /> -->
+        <!-- HANDS -->
+        <pair name="cp_s_pitch_l" geom1="floor" geom2="g_s_pitch_l" />
+        <pair name="cp_s_pitch_r" geom1="floor" geom2="g_s_pitch_r" />
+        <pair name="cp_s_adapter_l" geom1="floor" geom2="g_s_adapter_l" />
+        <pair name="cp_s_adapter_r" geom1="floor" geom2="g_s_adapter_r" />
+        <!-- <pair name="cp_s_roll_r" geom1="floor" geom2="g_s_roll_r" /> -->
+        <!-- <pair name="cp_s_roll_l" geom1="floor" geom2="g_s_roll_l" /> -->
+        <pair name="cp_s_yaw_l" geom1="floor" geom2="g_s_yaw_l" />
+        <pair name="cp_s_yaw_r" geom1="floor" geom2="g_s_yaw_r" />
+        <pair name="cp_end_arm_l" geom1="floor" geom2="g_end_arm_l" />
+        <pair name="cp_end_arm_r" geom1="floor" geom2="g_end_arm_r" />
+        <!-- <pair name="cp_e_cyl_l" geom1="floor" geom2="g_e_cyl_l" /> -->
+        <!-- <pair name="cp_e_cyl_r" geom1="floor" geom2="g_e_cyl_r" /> -->
+        <!-- <pair name="cp_e_piston_l" geom1="floor" geom2="g_e_piston_l" /> -->
+        <!-- <pair name="cp_e_piston_r" geom1="floor" geom2="g_e_piston_r" /> -->
+        <!-- LEGS -->
+        <pair name="cp_leg_adapter_l" geom1="floor" geom2="g_leg_adapter_l" />
+        <pair name="cp_leg_adapter_r" geom1="floor" geom2="g_leg_adapter_r" />
+        <!-- <pair name="cp_hip_yaw_l" geom1="floor" geom2="g_hip_yaw_l" /> -->
+        <!-- <pair name="cp_hip_yaw_r" geom1="floor" geom2="g_hip_yaw_r" /> -->
+        <pair name="cp_thigh_l" geom1="floor" geom2="g_thigh_l" />
+        <pair name="cp_thigh_r" geom1="floor" geom2="g_thigh_r" />
+        <!-- <pair name="cp_k_cyl_l" geom1="floor" geom2="g_k_cyl_l" /> -->
+        <!-- <pair name="cp_k_cyl_r" geom1="floor" geom2="g_k_cyl_r" /> -->
+        <!-- <pair name="cp_k_piston_l" geom1="floor" geom2="g_k_piston_l" /> -->
+        <!-- <pair name="cp_k_piston_r" geom1="floor" geom2="g_k_piston_r" /> -->
+        <!-- <pair name="cp_h_cyl_l" geom1="floor" geom2="g_h_cyl_l" /> -->
+        <!-- <pair name="cp_h_cyl_r" geom1="floor" geom2="g_h_cyl_r" /> -->
+        <!-- <pair name="cp_h_piston_l" geom1="floor" geom2="g_h_piston_l" /> -->
+        <!-- <pair name="cp_h_piston_r" geom1="floor" geom2="g_h_piston_r" /> -->
+        <!-- CALF -->
+        <pair name="cp_calf_l" geom1="floor" geom2="g_calf_l" />
+        <pair name="cp_calf_r" geom1="floor" geom2="g_calf_r" />
+        <!-- <pair name="cp_acyl_li" geom1="floor" geom2="g_acyl_li" /> -->
+        <!-- <pair name="cp_acyl_ri" geom1="floor" geom2="g_acyl_ri" /> -->
+        <!-- <pair name="cp_acyl_lo" geom1="floor" geom2="g_acyl_lo" /> -->
+        <!-- <pair name="cp_acyl_ro" geom1="floor" geom2="g_acyl_ro" /> -->
+        <!-- <pair name="cp_a_piston_li" geom1="floor" geom2="g_a_piston_li" /> -->
+        <!-- <pair name="cp_a_piston_lo" geom1="floor" geom2="g_a_piston_lo" /> -->
+        <!-- <pair name="cp_a_piston_ri" geom1="floor" geom2="g_a_piston_ri" /> -->
+        <!-- <pair name="cp_a_piston_ro" geom1="floor" geom2="g_a_piston_ro" /> -->
+        <!-- <pair name="cp_crank_lo" geom1="floor" geom2="g_crank_lo" /> -->
+        <!-- <pair name="cp_crank_li" geom1="floor" geom2="g_crank_li" /> -->
+        <!-- <pair name="cp_crank_ro" geom1="floor" geom2="g_crank_ro" /> -->
+        <!-- <pair name="cp_crank_ri" geom1="floor" geom2="g_crank_ri" /> -->
+        <!-- <pair name="cp_tf_lo" geom1="floor" geom2="g_tf_lo" /> -->
+        <!-- <pair name="cp_tf_li" geom1="floor" geom2="g_tf_li" /> -->
+        <!-- <pair name="cp_tf_ro" geom1="floor" geom2="g_tf_ro" /> -->
+        <!-- <pair name="cp_tf_ri" geom1="floor" geom2="g_tf_ri" /> -->
+        <!-- FEET -->
+        <!-- <pair name="cp_a_commutator_l" geom1="floor" geom2="g_a_commutator_l" /> -->
+        <!-- <pair name="cp_a_commutator_r" geom1="floor" geom2="g_a_commutator_r" /> -->
+        <pair name="cp_foot_l" geom1="floor" geom2="g_foot_l" gap="0.001" margin="0.001" condim="4"
+            friction="2.3 2.3 1 2.3 2.3" solref="0.0002 3" />
+        <pair name="cp_foot_r" geom1="floor" geom2="g_foot_r" gap="0.001" margin="0.001" condim="4"
+            friction="2.3 2.3 1 2.3 2.3" solref="0.0002 3" />
+        <!-- <pair name="cp_foot_l_collision" geom1="g_collision_box" geom2="g_foot_l" /> -->
+        <!-- <pair name="cp_foot_r_collision" geom1="g_collision_box" geom2="g_foot_r" /> -->
+    </contact>
+</mujoco>
