@@ -32,9 +32,8 @@
 #include "mujoco/mjvisualize.h"
 #include "platform_ui_adapter.h"
 
-#include <opencv2/highgui.hpp>
 #include <opencv2/opencv.hpp>
-#include <opencv4/opencv2/opencv.hpp>
+#include <opencv2/highgui.hpp>
 #include <opencv2/videoio.hpp>
 
 /*** AUVC ***/

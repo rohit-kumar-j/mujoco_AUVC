@@ -14,6 +14,20 @@
 
 cmake_minimum_required(VERSION 3.16)
 
+set(CMAKE_C_STANDARD 11)
+set(CMAKE_C_STANDARD_REQUIRED ON)
+set(CMAKE_C_EXTENSIONS OFF) # Optional: enforce strict C11 without GNU extensions
+
+# Set C++ standard to C++17 for the entire project (as a default)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF) # Optional: enforce strict C++17 without GNU extensions
+
+
+find_package(OpenCV REQUIRED)
+find_package(Eigen3 REQUIRED)
+include_directories(${OpenCV_INCLUDE_DIRS})
+
 add_subdirectory(AUVC)
 
 # INTERPROCEDURAL_OPTIMIZATION is enforced when enabled.
@@ -122,6 +136,7 @@ target_link_libraries(platform_ui_adapter PUBLIC mujoco::mujoco)
 if(SIMULATE_GLFW_DYNAMIC_SYMBOLS)
   target_compile_definitions(platform_ui_adapter PUBLIC mjGLFW_DYNAMIC_SYMBOLS)
 endif()
+
 add_library(mujoco::platform_ui_adapter ALIAS platform_ui_adapter)
 
 add_library(libsimulate STATIC $<TARGET_OBJECTS:platform_ui_adapter>)
@@ -138,11 +153,13 @@ target_sources(
 )
 target_include_directories(libsimulate PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}
                                               ${OpenCV_INCLUDE_DIRS}
+                                              ${EIGEN3_INCLUDE_DIR}
                           )
 target_compile_options(libsimulate PRIVATE ${MUJOCO_SIMULATE_COMPILE_OPTIONS})
 target_link_libraries(libsimulate PUBLIC lodepng
                                          mujoco::platform_ui_adapter
                                          mujoco::mujoco
+                                         v4l2
                                          # CustomTag
                      )
 target_link_options(libsimulate PRIVATE ${MUJOCO_SIMULATE_LINK_OPTIONS})

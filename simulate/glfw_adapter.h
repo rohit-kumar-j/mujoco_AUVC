@@ -21,10 +21,10 @@
 #include <mujoco/mujoco.h>
 #include "platform_ui_adapter.h"
 
-#ifdef __APPLE__
+// #ifdef __APPLE__
 #include <optional>
 #include "glfw_corevideo.h"
-#endif
+// #endif
 
 namespace mujoco {
 class GlfwAdapter : public PlatformUIAdapter {
