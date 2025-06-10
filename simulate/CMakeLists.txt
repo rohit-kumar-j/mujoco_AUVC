@@ -155,6 +155,11 @@ target_include_directories(libsimulate PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}
                                               ${OpenCV_INCLUDE_DIRS}
                                               ${EIGEN3_INCLUDE_DIR}
                           )
+target_compile_options(libsimulate PRIVATE
+    -Wno-overloaded-virtual
+    -Wno-class-memaccess
+)
+
 target_compile_options(libsimulate PRIVATE ${MUJOCO_SIMULATE_COMPILE_OPTIONS})
 target_link_libraries(libsimulate PUBLIC lodepng
                                          mujoco::platform_ui_adapter
@@ -200,6 +205,11 @@ if(SIMULATE_BUILD_EXECUTABLE)
     simulate PUBLIC
       ${OpenCV_INCLUDE_DIRS}
   )
+  target_compile_options(simulate PRIVATE
+    -Wno-overloaded-virtual
+    -Wno-class-memaccess
+  )
+
 
   target_link_libraries(
     simulate
