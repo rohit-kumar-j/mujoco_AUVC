@@ -1,7 +1,7 @@
 #ifndef TAGDETECTION_H
 #define TAGDETECTION_H
 
-#include <eigen3/Eigen/Dense>
+#include <Eigen/Dense>
 
 #include "opencv2/opencv.hpp"
 

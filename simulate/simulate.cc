@@ -30,8 +30,8 @@
 
 /*** AUVC : AR Tags ***/
 #include <fcntl.h>
-#include <libv4l2.h>
-#include <linux/videodev2.h>
+// #include <libv4l2.h>
+// #include <linux/videodev2.h>
 #include <errno.h>
 #include <opencv2/highgui.hpp>
 #include <opencv2/opencv.hpp>
