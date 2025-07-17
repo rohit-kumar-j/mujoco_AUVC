@@ -589,7 +589,7 @@ void ShowSensor(mj::Simulate* sim, mjrRect rect) {
 }
 
 
-void renderActuatorForces(mjModel* m, mjData* d, mjvOption* opt, mjvPerturb* pert, mjvCamera* cam, mjvScene* scn){
+/* void renderActuatorForces2(mjModel* m, mjData* d, mjvOption* opt, mjvPerturb* pert, mjvCamera* cam, mjvScene* scn){
     const char* thruster_names[10] = {"st1","st2","st3","st4","st5","st6", "sfloat1","sfloat2","sfloat3","sfloat4"};
     const char* actuator_names[10] = {"a1","a2","a3","a4","a5","a6", "sf1","sf2","sf3","sf4"};
     for(int i=0; i<10; i++){
@@ -632,6 +632,68 @@ void renderActuatorForces(mjModel* m, mjData* d, mjvOption* opt, mjvPerturb* per
         scn->ngeom +=1;
     }
 
+} */
+
+void renderActuatorForces(mjModel* m, mjData* d, mjvOption* opt, mjvPerturb* pert, mjvCamera* cam, mjvScene* scn){
+    const char* thruster_names[10] = {"st1","st2","st3","st4","st5","st6", "sfloat1","sfloat2","sfloat3","sfloat4"};
+    const char* actuator_names[10] = {"a1","a2","a3","a4","a5","a6", "sf1","sf2","sf3","sf4"};
+    
+    for(int i=0; i<10; i++){
+        int idx = mj_name2id(m, mjOBJ_SITE, thruster_names[i]);
+        int act_idx = mj_name2id(m, mjOBJ_ACTUATOR, actuator_names[i]);
+        
+        mjvGeom *g = &scn->geoms[scn->ngeom];
+        g->type = mjGEOM_ARROW;
+        
+        mjtNum size[3];
+        size[0] = 0.02;   // radius
+        size[1] = 0.02;
+        size[2] = d->ctrl[act_idx]*0.02;  // length = force applied
+        
+        mjtNum pos[3];
+        pos[0] = d->site_xpos[3*idx + 0];
+        pos[1] = d->site_xpos[3*idx + 1];
+        pos[2] = d->site_xpos[3*idx + 2];
+        
+        float rgba[4];
+        if(size[2] <= 0) {
+            rgba[0] = 1; rgba[1] = 0; rgba[2] = 0; rgba[3] = 1; // Red for downward
+        } else {
+            rgba[0] = 0; rgba[1] = 1; rgba[2] = 0; rgba[3] = 1; // Green for upward
+        }
+        
+        // Default values
+        g->dataid = -1;
+        g->objtype = mjOBJ_UNKNOWN;
+        g->objid = -1;
+        g->category = mjCAT_DECOR;
+        g->matid = -1;
+        g->texcoord = -1;
+        g->segid = -1;
+        g->emission = 0;
+        g->specular = 0.5;
+        g->shininess = 0.5;
+        g->reflectance = 0;
+
+        mjtNum mat[9];
+        
+        // Check if this is a buoyancy force (sfloat1-4, indices 6-9)
+        if(i >= 6) {
+            // For buoyancy forces: always use world coordinate orientation (straight up/down)
+            // Identity matrix = forces always along world Z-axis
+            mat[0] = 1; mat[1] = 0; mat[2] = 0;  // X-axis
+            mat[3] = 0; mat[4] = 1; mat[5] = 0;  // Y-axis  
+            mat[6] = 0; mat[7] = 0; mat[8] = 1;  // Z-axis (up/down)
+        } else {
+            // For thruster forces: use the site's local orientation
+            for (int j = 0; j < 9; ++j) {
+                mat[j] = d->site_xmat[9*idx + j];
+            }
+        }
+        
+        mjv_initGeom(g, mjGEOM_ARROW, size, pos, mat, rgba);
+        scn->ngeom += 1;
+    }
 }
 
 

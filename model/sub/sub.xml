@@ -11,7 +11,7 @@
 
     <asset>
         <mesh name="sub_mesh" scale="0.05 0.05 0.05" file="bluerov2.obj" />
-        <mesh name="ccw_prop_mesh" file="t200_ccw_prop.obj" />
+        <mesh name="ccw_prop_mesh" file="t200_ccw_prop.obj" scale="2.4 2.4 2.4" />
         <mesh name="cw_prop_mesh" file="t200_cw_prop.obj" />
         <texture type="skybox" builtin="gradient" rgb1="0.3 0.3 0.3" rgb2="1.0 1.0 1.0" width="512" height="512"/>
         <!-- <texture name="plane" type="2d" builtin="flat" rgb1="0.1 0.1 0.1" width="512" height="512" mark="cross" markrgb="0 0 0"/> -->
@@ -54,7 +54,7 @@
         <geom type="plane" size="25 0.2 0.02" rgba="0 0 0 1" contype="0" conaffinity="0"/>
       </default>
       <default class='pool_walls_and_walls'>
-         <geom type="plane" material="floor_and_wall"/>
+         <geom type="plane" material="floor_and_wall" mass="0.0001"/>
       </default>
       <default class='pool_cross'>
       <geom type="plane" size=".2 .7 .7" rgba="0 0 0 1" contype="0" conaffinity="0"/>
@@ -64,11 +64,11 @@
   <worldbody>
 
         <!-- full sub dimensions: 18 in x 13.3 in x 10 in-->
-        <body name="sub" pos="0 0 1" euler="0 0 0">
+        <body name="sub" pos="1 1 2" euler="0 0 0">
         <!-- <body name="sub" pos="24.5 12 1" euler="0 0 0"> -->
             <freejoint/>
-            <geom name="sub_geom" type="box" rgba="0.9 0.9 0.8 0" size="0.4572 0.33782 0.254" mass="9" />
-            <geom name="box" type="mesh" euler="1.57 3.14 0" rgba="0.9 0.9 0.8 1" mesh="sub_mesh" size="0.4572 0.33782 0.254" mass="0.0001" />
+            <!-- <geom name="sub_geom" type="box" rgba="0.9 0.9 0.8 0" size="0.4572 0.33782 0.254" mass="9" /> -->
+            <geom name="box" type="mesh" euler="1.57 3.14 0" rgba="0.9 0.9 0.8 1" mesh="sub_mesh" size="0.4572 0.33782 0.254" mass="9" />
             <!-- <camera name="sub_track_cam" mode="track" pos="1 0 0"/> -->
             <!-- <camera name="sub_front_cam" mode="fixed" euler="0 1.57 0" pos="0 0 0" fovy="45"/> -->
             <!-- Bouyancy -->
@@ -90,27 +90,33 @@
             </body>
             <!-- Thruster -->
             <body name="bt1" euler="1.57 -0.73 0" pos="-0.27 0.19 0">
-                <geom name="thruster1" type="cylinder" size="0.09 0.05" rgba="1 0.3 0 1" mass="0.0001"/>
+                <joint name="t1" type="hinge" axis="0 0 1"/>
+                <geom name="thruster1" type="mesh" mesh="ccw_prop_mesh" rgba="1 1 0 1" mass="0.0001"/>
                 <site name="st1" />
             </body>
             <body name="bt2" euler="1.57 3.87 0" pos="-0.27 -0.19 0">
-                <geom name="thruster2" type="cylinder" size="0.09 0.05" rgba="1 0.3 0 1" mass="0.0001"/>
+                <joint name="t2" type="hinge" axis="0 0 1"/>
+                <geom name="thruster2" type="mesh" mesh="ccw_prop_mesh" rgba="1 1 0 1" mass="0.0001"/>
                 <site name="st2" />
             </body>
             <body name="bt3" euler="1.57 0.73 0" pos="0.30 0.18 0">
-                <geom name="thruster3" type="cylinder" size="0.09 0.05" rgba="1 0.3 0 1" mass="0.0001"/>
+                <joint name="t3" type="hinge" axis="0 0 1"/>
+                <geom name="thruster3" type="mesh" mesh="ccw_prop_mesh" rgba="1 1 0 1" mass="0.0001"/>
                 <site name="st3" />
             </body>
             <body name="bt4" euler="1.57 -3.87 0" pos="0.30 -0.18 0">
-                <geom name="thruster4" type="cylinder" size="0.09 0.05" rgba="1 0.3 0 1" mass="0.0001"/>
+                <joint name="t4" type="hinge" axis="0 0 1"/>
+                <geom name="thruster4" type="mesh" mesh="ccw_prop_mesh" rgba="1 1 0 1" mass="0.0001"/>
                 <site name="st4" />
             </body>
             <body name="bt5" euler="0 0 0" pos="0 -0.22 0.15">
-                <geom name="thruster5" type="cylinder" size="0.09 0.05" rgba="1 0.3 0 1" mass="0.0001"/>
+                <joint name="t5" type="hinge" axis="0 0 1"/>
+                <geom name="thruster5" type="mesh" mesh="ccw_prop_mesh" rgba="1 1 0 1" mass="0.0001"/>
                 <site name="st5" />
             </body>
             <body name="bt6" euler="0 0 0" pos="0 0.22 0.15">
-                <geom name="thruster6" type="cylinder" size="0.09 0.05" rgba="1 0.3 0 1" mass="0.0001"/>
+                <joint name="t6" type="hinge" axis="0 0 1"/>
+                <geom name="thruster6" type="mesh" mesh="ccw_prop_mesh" rgba="1 1 0 1" mass="0.0001"/>
                 <site name="st6" />
             </body>
             <body name="camera_link1" euler="0 0 0" pos="-0.3 0 0.13">
@@ -139,7 +145,7 @@
       <light directional="true" diffuse=".6 .6 .6" pos="0 0 1" dir="0 0 -10"/>
       <camera name="camera1" mode="trackcom" pos="0 -1.3 1.6" xyaxes="1 0 0 0 0.707 0.707"/>
 
-      <body name="full_pool" euler="0 0 0" pos="0 0 0">
+      <!-- <body name="full_pool" euler="0 0 0" pos="0 0 0"> -->
         <geom name="ar_tag0" class="ar_tag_class"  pos="-2 0 1" material="ar_tag_0_mat"/>
         <geom name="ar_tag1" class="ar_tag_class"  pos="-2 1 1" material="ar_tag_1_mat"/>
         <geom name="ar_tag2" class="ar_tag_class"  pos="-2 2 1" material="ar_tag_2_mat"/>
@@ -202,7 +208,7 @@
         <geom euler="0 -1.57 1.57" class="pool_cross" pos="24.99 -7.5 1" />
         <geom euler="0 -1.57 0"    class="pool_cross" pos="24.99 -10 1" />
         <geom euler="0 -1.57 1.57" class="pool_cross" pos="24.99 -10 1" />
-      </body>
+      <!-- </body> -->
 
       <!-- <geom name="water_geom" type="box" pos="0 0 1" size="25 12.5 0.001" rgba="0.2 0.2 1 0.5" contype="0" conaffinity="0"/> -->
     </worldbody>
@@ -212,8 +218,8 @@
         <motor name="a2"  site="st2" gear="0 0 1 0 0 0"/>
         <motor name="a3"  site="st3" gear="0 0 1 0 0 0"/>
         <motor name="a4"  site="st4" gear="0 0 1 0 0 0"/>
-        <motor name="a5"  site="st5" gear="0 0 1 0 0 0"/>
-        <motor name="a6"  site="st6" gear="0 0 1 0 0 0"/>
+        <motor name="a5"  site="st5" ctrllimited="true" ctrlrange="-1000 1000" gear="0 0 1 0 0 0"/>
+        <motor name="a6"  site="st6" ctrllimited="true" ctrlrange="-1000 1000" gear="0 0 1 0 0 0"/>
         <motor name="sf1"  site="sfloat1" gear="0 0 1 0 0 0"/>
         <motor name="sf2"  site="sfloat2" gear="0 0 1 0 0 0"/>
         <motor name="sf3"  site="sfloat3" gear="0 0 1 0 0 0"/>
@@ -226,22 +232,4 @@
         <!-- <framepos name="Body_Pos" objtype="site" objname="imu"/> -->
         <framequat name="Body_Quat" objtype="site" objname="imu"/>
     </sensor>
-
-    <contact>
-      <exclude body1="sub" body2="full_pool"/>
-      <exclude body1="camera_link1" body2="full_pool"/>
-      <exclude body1="camera_link2" body2="full_pool"/>
-      <exclude body1="cam_cb1" body2="full_pool"/>
-      <exclude body1="cam_cb2" body2="full_pool"/>
-      <exclude body1="bt1" body2="full_pool"/>
-      <exclude body1="bt2" body2="full_pool"/>
-      <exclude body1="bt3" body2="full_pool"/>
-      <exclude body1="bt4" body2="full_pool"/>
-      <exclude body1="bt5" body2="full_pool"/>
-      <exclude body1="bt6" body2="full_pool"/>
-      <exclude body1="bfloat1" body2="full_pool"/>
-      <exclude body1="bfloat2" body2="full_pool"/>
-      <exclude body1="bfloat3" body2="full_pool"/>
-      <exclude body1="bfloat4" body2="full_pool"/>
-    </contact>
 </mujoco>

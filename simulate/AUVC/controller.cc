@@ -2,6 +2,7 @@
 #include "mujoco/mjmodel.h"
 
 #include <dlfcn.h>
+#include <math.h>
 #include <mujoco/mujoco.h>
 #include <stdio.h>
 
@@ -66,6 +67,13 @@ extern "C" int controllerInitPlug(mjModel *m, mjData *d) {
 }
 
 extern "C" bool controllerUpdatePlug(mjModel *m, mjData *d) {
+  // d->ctrl[0]= -1000.0;
+  // d->ctrl[1]= 1000.0;
+  // d->ctrl[2]= -1000.0;
+  // d->ctrl[3]= 1000.0;
+  // d->ctrl[4]=-1.0;
+  // d->ctrl[5]=-1.0;
+  return true;
   // int idx = mj_name2id(m, mjOBJ_ACTUATOR , "a6");
 
   // Capture Orientation
