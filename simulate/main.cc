@@ -654,7 +654,7 @@ int main(int argc, char** argv) {
         printf("ERROR: Build the RoverPhysics first before launching the simualte executable: \"cmake --build <path-to-build-dir> --target RoverPhysics\" \n");
     } // Load controller
 
-  const char* filename = "/home/rohit/Github/mujoco_AUVC/model/sub/sub.xml";
+  const char* filename = "/home/rohit/Github/mujoco_AUVC/model/sub/pool.xml";
   if (argc >  1) {
     filename = argv[1];
   }

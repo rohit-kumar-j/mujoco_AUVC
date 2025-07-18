@@ -67,8 +67,8 @@
         <body name="sub" pos="1 1 2" euler="0 0 0">
         <!-- <body name="sub" pos="24.5 12 1" euler="0 0 0"> -->
             <freejoint/>
-            <!-- <geom name="sub_geom" type="box" rgba="0.9 0.9 0.8 0" size="0.4572 0.33782 0.254" mass="9" /> -->
-            <geom name="box" type="mesh" euler="1.57 3.14 0" rgba="0.9 0.9 0.8 1" mesh="sub_mesh" size="0.4572 0.33782 0.254" mass="9" />
+            <geom name="sub_weight_compenesation_geom" type="box" pos="0.163 0.0133 0" rgba="0.9 0.1 0.8 1" size="0.05 0.05 0.05" mass="0.5" />
+            <geom name="sub_geom" type="mesh" euler="1.57 3.14 0" rgba="0.9 0.9 0.8 1" mesh="sub_mesh" size="0.4572 0.33782 0.254" mass="9" />
             <!-- <camera name="sub_track_cam" mode="track" pos="1 0 0"/> -->
             <!-- <camera name="sub_front_cam" mode="fixed" euler="0 1.57 0" pos="0 0 0" fovy="45"/> -->
             <!-- Bouyancy -->
